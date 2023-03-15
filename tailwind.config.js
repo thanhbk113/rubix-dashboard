@@ -1,29 +1,22 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const { fontFamily } = require('tailwindcss/defaultTheme');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     extend: {
-      fontFamily: {
-        primary: ['Inter', ...fontFamily.sans],
-      },
       colors: {
-        primary: {
-          // Customize it on globals.css :root
-          50: 'rgb(var(--tw-color-primary-50) / <alpha-value>)',
-          100: 'rgb(var(--tw-color-primary-100) / <alpha-value>)',
-          200: 'rgb(var(--tw-color-primary-200) / <alpha-value>)',
-          300: 'rgb(var(--tw-color-primary-300) / <alpha-value>)',
-          400: 'rgb(var(--tw-color-primary-400) / <alpha-value>)',
-          500: 'rgb(var(--tw-color-primary-500) / <alpha-value>)',
-          600: 'rgb(var(--tw-color-primary-600) / <alpha-value>)',
-          700: 'rgb(var(--tw-color-primary-700) / <alpha-value>)',
-          800: 'rgb(var(--tw-color-primary-800) / <alpha-value>)',
-          900: 'rgb(var(--tw-color-primary-900) / <alpha-value>)',
+        a: '#797eff',
+        light: {
+          background: { body: '#F7F7F9', hover: '#eaeaed', active: '#787eff' },
+          primary: { main: '#666CFF', dark: '#666CFF', light: '#787EFF' },
+          text: {
+            primary: 'rgba(76, 78, 100, 0.87)',
+            secondary: 'rgba(76, 78, 100, 0.68)',
+          },
+          error: '#ff0e00',
+          borderColor: 'rgba(0, 0, 0, 0.23)',
         },
-        dark: '#222222',
       },
       keyframes: {
         flicker: {
@@ -37,6 +30,10 @@ module.exports = {
             filter: 'none',
           },
         },
+        wiggle: {
+          '0%, 100%': { transform: 'rotate(-3deg)' },
+          '50%': { transform: 'rotate(3deg)' },
+        },
         shimmer: {
           '0%': {
             backgroundPosition: '-700px 0',
@@ -49,8 +46,11 @@ module.exports = {
       animation: {
         flicker: 'flicker 3s linear infinite',
         shimmer: 'shimmer 1.3s linear infinite',
+        wiggle: 'wiggle 1s ease-in-out infinite',
+      },
+      flexGrow: {
+        2: 2,
       },
     },
   },
-  plugins: [require('@tailwindcss/forms')],
 };

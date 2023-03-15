@@ -1,31 +1,32 @@
-import * as React from 'react';
+import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
+import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
+import SearchIcon from '@mui/icons-material/Search';
+import TranslateIcon from '@mui/icons-material/Translate';
 
-import UnstyledLink from '@/components/links/UnstyledLink';
-
-const links = [
-  { href: '/', label: 'Route 1' },
-  { href: '/', label: 'Route 2' },
-];
-
-export default function Header() {
+const Header = () => {
   return (
-    <header className='sticky top-0 z-50 bg-white'>
-      <div className='layout flex h-14 items-center justify-between'>
-        <UnstyledLink href='/' className='font-bold hover:text-gray-600'>
-          Home
-        </UnstyledLink>
-        <nav>
-          <ul className='flex items-center justify-between space-x-4'>
-            {links.map(({ href, label }) => (
-              <li key={`${href}${label}`}>
-                <UnstyledLink href={href} className='hover:text-gray-600'>
-                  {label}
-                </UnstyledLink>
-              </li>
-            ))}
-          </ul>
-        </nav>
+    <div className='flex h-[60px] items-center justify-end bg-light-background-body pr-8'>
+      <form action='' className='flex h-full items-center justify-between'>
+        <div className='flex h-full w-[60px] cursor-pointer items-center justify-center'>
+          <SearchIcon />
+        </div>
+        <input
+          type='text'
+          className='w-full bg-light-background-body outline-0'
+          placeholder='Search (Ctrl+/)'
+        />
+      </form>
+      <div className='flex h-full w-[60px] cursor-pointer items-center justify-center'>
+        <TranslateIcon />
       </div>
-    </header>
+      <div className='flex h-full w-[60px] cursor-pointer items-center justify-center'>
+        <DarkModeOutlinedIcon />
+      </div>
+      <div className='flex h-full w-[60px] cursor-pointer items-center justify-center'>
+        <NotificationsNoneOutlinedIcon />
+      </div>
+    </div>
   );
-}
+};
+
+export default Header;
