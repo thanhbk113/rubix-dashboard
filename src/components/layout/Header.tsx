@@ -5,7 +5,7 @@ import TranslateIcon from '@mui/icons-material/Translate';
 
 const Header = () => {
   return (
-    <div className='flex h-[60px] items-center justify-end bg-light-background-body pr-8'>
+    <div className='sticky top-0 z-10 flex items-center justify-end bg-light-background-body p-5 pr-8'>
       <form action='' className='flex h-full items-center justify-between'>
         <div className='flex h-full w-[60px] cursor-pointer items-center justify-center'>
           <SearchIcon />

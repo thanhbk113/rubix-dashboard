@@ -26,7 +26,7 @@ const ListLabels = [
 
 const ListProductLabels = [
   {
-    path: '/dashboard/crm',
+    path: '/product/create-product',
     label: 'Create Product',
   },
 ];
@@ -51,7 +51,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
     <div className='justify-betwwen flex w-screen bg-light-background-body text-light-text-primary '>
       <div
         className={` ${
-          isShow ? 'max-w-[300px]' : 'w-[70px]'
+          isShow ? 'max-w-[300px]' : 'max-w-[70px]'
         } flex h-screen w-full flex-col overflow-y-auto pt-[62px]`}
         onMouseEnter={() => {
           if (isSlide === false) {
@@ -64,7 +64,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           }
         }}
       >
-        <div className='fixed top-0 left-0 flex h-[60px] w-full max-w-[288px] items-center justify-between bg-light-background-body p-4'>
+        <div className='fixed top-0 left-0 flex h-[60px] w-full max-w-[285px] items-center justify-between bg-light-background-body p-4'>
           {isShow ? (
             <div className='flex items-center gap-2'>
               <Logo />
@@ -124,12 +124,101 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           isEnableArrowIcon={true}
           listRoutes={ListProductLabels}
         />
+        <NavMenu
+          className=''
+          labelIcon={<GridViewIcon />}
+          title='Product'
+          isEnableArrowIcon={true}
+          listRoutes={ListProductLabels}
+        />
+        <NavMenu
+          className=''
+          labelIcon={<GridViewIcon />}
+          title='Product'
+          isEnableArrowIcon={true}
+          listRoutes={ListProductLabels}
+        />
+        <NavMenu
+          className=''
+          labelIcon={<GridViewIcon />}
+          title='Product'
+          isEnableArrowIcon={true}
+          listRoutes={ListProductLabels}
+        />
+        <NavMenu
+          className=''
+          labelIcon={<GridViewIcon />}
+          title='Product'
+          isEnableArrowIcon={true}
+          listRoutes={ListProductLabels}
+        />
+        <NavMenu
+          className=''
+          labelIcon={<GridViewIcon />}
+          title='Product'
+          isEnableArrowIcon={true}
+          listRoutes={ListProductLabels}
+        />
+        <NavMenu
+          className=''
+          labelIcon={<GridViewIcon />}
+          title='Product'
+          isEnableArrowIcon={true}
+          listRoutes={ListProductLabels}
+        />
+        <NavMenu
+          className=''
+          labelIcon={<GridViewIcon />}
+          title='Product'
+          isEnableArrowIcon={true}
+          listRoutes={ListProductLabels}
+        />
+        <NavMenu
+          className=''
+          labelIcon={<GridViewIcon />}
+          title='Product'
+          isEnableArrowIcon={true}
+          listRoutes={ListProductLabels}
+        />
+        <NavMenu
+          className=''
+          labelIcon={<GridViewIcon />}
+          title='Product'
+          isEnableArrowIcon={true}
+          listRoutes={ListProductLabels}
+        />
+        <NavMenu
+          className=''
+          labelIcon={<GridViewIcon />}
+          title='Product'
+          isEnableArrowIcon={true}
+          listRoutes={ListProductLabels}
+        />
+        <NavMenu
+          className=''
+          labelIcon={<GridViewIcon />}
+          title='Product'
+          isEnableArrowIcon={true}
+          listRoutes={ListProductLabels}
+        />
+        <NavMenu
+          className=''
+          labelIcon={<GridViewIcon />}
+          title='Product'
+          isEnableArrowIcon={true}
+          listRoutes={ListProductLabels}
+        />
+        <NavMenu
+          className=''
+          labelIcon={<GridViewIcon />}
+          title='Product'
+          isEnableArrowIcon={true}
+          listRoutes={ListProductLabels}
+        />
       </div>
-      <div className='flex h-screen flex-1 flex-col overflow-y-auto pb-10'>
-        <div className='sticky right-0 z-10 '>
-          <Header />
-        </div>
-        <div>{children}</div>
+      <div className='flex h-screen flex-1 flex-col overflow-y-auto'>
+        <Header />
+        <div className=' bg-white p-10'>{children}</div>
       </div>
     </div>
   );

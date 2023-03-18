@@ -1,30 +1,34 @@
-import axios from 'axios';
-import jwt_decode, { JwtPayload } from 'jwt-decode';
 import NextAuth from 'next-auth';
 import { JWT } from 'next-auth/jwt';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
-import { BASE_URL_API, ERROR_TOKEN, ROUTES } from '@/constant';
+import { CmsApi } from '@/api/cms-api';
+import { ERROR_TOKEN, ROUTES } from '@/constant';
 
 const handleRefreshToken = async (token: JWT) => {
   try {
-    const tokenData = await axios
-      .post(`${BASE_URL_API}/account/refresh-token`, {
-        refreshToken: token.refreshToken,
-      })
-      .then((value) => value.data.data);
+    const tokenData = await CmsApi.refreshToken({
+      refresh_token: token.refreshToken,
+    });
 
     console.log('refresh token here:', tokenData);
-    const { accessToken: accessToken, refreshToken: refreshToken } = tokenData;
-    const accessTokenExpirationTime =
-      (jwt_decode<JwtPayload>(accessToken).exp as number) * 1000 - 10;
+
+    const {
+      access_token: accessToken,
+      refresh_token: refreshToken,
+      expiresIn: accessTokenExpires,
+    } = tokenData.data;
+    // const accessTokenExpirationTime =
+    //   (jwt_decode<JwtPayload>(accessToken).exp as number) * 1000 - 10;
     return {
       ...token,
       accessToken,
-      accessTokenExpires: accessTokenExpirationTime,
+      accessTokenExpires,
       refreshToken: refreshToken ?? token.refreshToken, // Fall back to old refresh token
     };
   } catch (error) {
+    console.log('error', error);
+
     return {
       ...token,
       error: ERROR_TOKEN,
@@ -48,23 +52,30 @@ export default NextAuth({
       authorize: async (credentials) => {
         try {
           //login
-          const data = await axios.post(`${BASE_URL_API}/account/login`, {
-            email: credentials?.email,
-            password: credentials?.password,
+          if (!credentials) {
+            return null;
+          }
+          const res = await CmsApi.login({
+            email: credentials.email,
+            password: credentials.password,
+            requestFrom: 'CMS',
           });
 
-          if (data) {
-            const { accessToken: accessToken, refreshToken: refreshToken } =
-              data.data.user; //We get the access token and the refresh token from the data object.
+          if (res) {
+            const {
+              access_token: accessToken,
+              refresh_token: refreshToken,
+              expiresIn: accessTokenExpires,
+            } = res.data.token; //We get the access token and the refresh token from the data object.
 
-            const accessTokenExpirationTime =
-              (jwt_decode<JwtPayload>(accessToken).exp as number) * 1000 - 10;
+            // const accessTokenExpirationTime =
+            //   (jwt_decode<JwtPayload>(accessToken).exp as number) * 1000 - 10;
             //minus 10 seconds before expiration time to prevent token expiration error in the browser side unit ms
 
             return {
-              ...data.data.user,
+              ...res.data.user,
               accessToken,
-              accessTokenExpires: accessTokenExpirationTime,
+              accessTokenExpires,
               refreshToken,
             };
             //return new object user contain token
@@ -87,7 +98,19 @@ export default NextAuth({
           user,
         };
       }
-      return token;
+
+      const accessToken: any = token?.accessTokenExpires;
+      const expirationTime = accessToken.exp * 1000;
+      const currentTime = Date.now();
+
+      if (expirationTime && expirationTime - currentTime > 30 * 60 * 1000) {
+        // Token is still valid, just return it
+        return token;
+      }
+
+      // Token has expired or will expire in the next 30 minutes, refresh it
+      const refreshedToken = await handleRefreshToken(token);
+      return refreshedToken;
     },
     //The session() callback is called when a user logs in or log out
     async session({ session, token }) {

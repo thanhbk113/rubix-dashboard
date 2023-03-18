@@ -62,25 +62,29 @@ const Login = () => {
   });
 
   return (
-    <div className='flex h-screen w-full items-start'>
+    <div className='flex h-screen w-full items-center justify-center'>
       <Logo />
-      <div className='flex h-screen w-[1470px] overflow-hidden bg-[#f7f7f9]'>
-        <NextImage
-          width={954}
-          height={835}
-          className='absolute top-[5%] left-[15%] z-10 scale-90'
-          src='/image/login.png'
-          alt='Đồi núi'
-        />
-        <NextImage
-          width={1900}
-          height={288}
-          className='absolute top-[60%] h-[18rem] w-full '
-          src='/image/bg-login.png'
-          alt=''
-        />
+      <div className='relative hidden h-screen w-full items-center justify-center  bg-[#f7f7f9] md:flex'>
+        <div>
+          <NextImage
+            width={954}
+            height={835}
+            src='/image/login.png'
+            className='z-5 w-full'
+            alt='Đồi núi'
+          />
+        </div>
+        {/* <div className='absolute top-[70%]'>
+          <NextImage
+            width={1900}
+            height={500}
+            className='h-full w-full'
+            src='/image/bg-login.png'
+            alt=''
+          />
+        </div> */}
       </div>
-      <div className='absolute right-0 z-20 order-1 flex h-full w-[450px]  flex-none grow-0 flex-col justify-center bg-white px-7 pt-12 pb-9 '>
+      <div className='flex h-full w-full max-w-[450px] flex-col justify-center bg-white px-7 pt-12 pb-9 '>
         <div className='flex flex-col items-start'>
           <div className='flex flex-col items-start pb-6'>
             <h2 className='text-2xl font-semibold text-light-text-primary'>

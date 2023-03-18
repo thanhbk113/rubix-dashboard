@@ -1,33 +1,53 @@
-import axios from "axios";
+import { AxiosResponse } from 'axios';
 
-import { ReqLogin, ReqRegister, ResLogin, ResRegister } from "../shared/types/authType";
-import { ResCategory } from "../shared/types/categoryType";
-import { ReqItem, ReqSearch, ResItem } from "../shared/types/itemType";
-import { ResGetRoles, ResGetUsers } from "../shared/types/rolesType";
+import axiosClient from '@/api/axiosClient';
+
+import {
+  ReqLogin,
+  ReqRefresh,
+  ReqRegister,
+  ResLogin,
+  ResRefreshToken,
+  ResRegister,
+} from '../shared/types/authType';
+import { ResCategory } from '../shared/types/categoryType';
+import { ReqItem, ReqSearch, ResItem } from '../shared/types/itemType';
+import { ResGetRoles, ResGetUsers } from '../shared/types/rolesType';
 
 export const CmsApi = {
-  login: (req: ReqLogin) => {
-    return axios.post<ResLogin>("/api/auth/login", req);
+  login: async (req: ReqLogin) => {
+    return (
+      await axiosClient.post<AxiosResponse<ResLogin>>('/api/auth/login', req)
+    ).data;
   },
 
   register: (req: ReqRegister) => {
-    return axios.post<ResRegister>("/api/auth/register", req);
+    return axiosClient.post<ResRegister>('/api/auth/register', req);
+  },
+
+  refreshToken: async (req: ReqRefresh) => {
+    return (
+      await axiosClient.post<AxiosResponse<ResRefreshToken>>(
+        '/api/auth/refresh-token',
+        req
+      )
+    ).data;
   },
 
   getRoles: () => {
-    return axios.get<ResGetRoles>("/api/auth/roles");
+    return axiosClient.get<ResGetRoles>('/api/auth/roles');
   },
 
   getUsers: ({ sort, order, search, take }: ReqSearch) => {
-    return axios.get<ResGetUsers>("/api/users/all", {
+    return axiosClient.get<ResGetUsers>('/api/users/all', {
       params: { sort, order, search, take },
     });
   },
   createItem: (req: ReqItem) => {
-    return axios.post<ResItem>("/api/item/create", req);
+    return axiosClient.post<ResItem>('/api/item/create', req);
   },
 
   getCategory: () => {
-    return axios.get<ResCategory>("/api/cat");
+    return axiosClient.get<ResCategory>('/api/cat');
   },
 };

@@ -1,4 +1,5 @@
 export interface ResLogin {
+  data: { access_token: any; refresh_token: any };
   user: User;
   token: Token;
 }
@@ -37,6 +38,10 @@ export interface ReqRegister {
   email: string;
 }
 
+export interface ReqRefresh {
+  refresh_token: any;
+}
+
 export interface ResRegister {
   username: string;
   email: string;
@@ -49,6 +54,12 @@ export interface ResRegister {
   role: string;
   settings: Settings;
   isActive: boolean;
+}
+
+export interface ResRefreshToken {
+  access_token: string;
+  refresh_token: string;
+  expiresIn: string;
 }
 
 export interface Settings {

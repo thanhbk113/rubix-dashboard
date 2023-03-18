@@ -9,7 +9,7 @@ type ILogo = React.DetailedHTMLProps<
 
 const Logo: FC<ILogo> = () => {
   return (
-    <span className='absolute top-6 left-8 h-4 w-20'>
+    <span className='absolute top-6 left-8 z-10 h-4 w-20'>
       <NextImage
         width={100}
         height={40}

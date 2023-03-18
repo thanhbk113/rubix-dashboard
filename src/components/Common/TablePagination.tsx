@@ -1,7 +1,7 @@
-import KeyboardArrowLeftOutlinedIcon from "@mui/icons-material/KeyboardArrowLeftOutlined";
-import KeyboardArrowRightOutlinedIcon from "@mui/icons-material/KeyboardArrowRightOutlined";
-import { FormControl, MenuItem, Select } from "@mui/material";
-import { FC, useEffect, useState } from "react";
+import KeyboardArrowLeftOutlinedIcon from '@mui/icons-material/KeyboardArrowLeftOutlined';
+import KeyboardArrowRightOutlinedIcon from '@mui/icons-material/KeyboardArrowRightOutlined';
+import { FormControl, MenuItem, Select } from '@mui/material';
+import { FC, useEffect, useState } from 'react';
 
 interface ITablePagination {
   pagination: number;
@@ -49,27 +49,27 @@ const TablePagination: FC<ITablePagination> = ({ pagination, handleSort }) => {
   }, [valuePage]);
 
   return (
-    <div className="w-full h-16 flex justify-end items-center gap-4 mr-8">
+    <div className='mr-8 flex h-16 w-full items-center justify-end gap-4'>
       <span>Rows per page:</span>
-      <FormControl fullWidth style={{ width: "66px" }}>
+      <FormControl fullWidth style={{ width: '66px' }}>
         <Select
           sx={{
-            "& .MuiSelect-select .notranslate::after": "placeholder"
+            '& .MuiSelect-select .notranslate::after': 'placeholder'
               ? {
-                  content: `"${"Select Role"}"`,
+                  content: `"${'Select Role'}"`,
                   opacity: 0.6,
                   fontWeight: 400,
                 }
               : {},
           }}
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
+          labelId='demo-simple-select-label'
+          id='demo-simple-select'
           defaultValue={10}
           onChange={(e: any) => setValuePage(e.target.value)}
           style={{
-            width: "66px",
-            height: "32px",
-            borderRadius: "8px",
+            width: '66px',
+            height: '32px',
+            borderRadius: '8px',
           }}
         >
           <MenuItem value={10}>10</MenuItem>
@@ -80,29 +80,29 @@ const TablePagination: FC<ITablePagination> = ({ pagination, handleSort }) => {
       <span>
         {valueLeftPage}-{valueRightPage} of {pagination}
       </span>
-      <div className="flex justify-between items-center gap-2 pr-4">
+      <div className='flex items-center justify-between gap-2 pr-4'>
         <span
           className={
             valueLeftPage > 1
-              ? "cursor-pointer hover:bg-gray-200 rounded-full"
-              : "cursor-not-allowed" + " "
+              ? 'cursor-pointer rounded-full hover:bg-gray-200'
+              : 'cursor-not-allowed' + ' '
           }
         >
           <KeyboardArrowLeftOutlinedIcon
             onClick={handlePrevPage}
-            style={{ opacity: valueLeftPage > 1 ? "1" : "0.3" }}
+            style={{ opacity: valueLeftPage > 1 ? '1' : '0.3' }}
           />
         </span>
         <span
           className={
             valueRightPage < pagination
-              ? "cursor-pointer hover:bg-gray-200 rounded-full"
-              : "cursor-not-allowed"
+              ? 'cursor-pointer rounded-full hover:bg-gray-200'
+              : 'cursor-not-allowed'
           }
         >
           <KeyboardArrowRightOutlinedIcon
             onClick={handleNextPage}
-            style={{ opacity: valueRightPage < pagination ? "1" : "0.3" }}
+            style={{ opacity: valueRightPage < pagination ? '1' : '0.3' }}
           />
         </span>
       </div>

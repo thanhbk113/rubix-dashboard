@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 
 // !STARTERCONF Change these default meta
 const defaultMeta = {
-  title: 'Next.js + Tailwind CSS + TypeScript Starter',
+  title: 'Rubix Dashboard',
   siteName: 'Next.js + Tailwind CSS + TypeScript Starter',
   description:
     'A starter for Next.js, Tailwind CSS, and TypeScript with Absolute Import, Seo, Link component, pre-configured with Husky',
@@ -34,7 +34,6 @@ export default function Seo(props: SeoProps) {
 
   // Use siteName if there is templateTitle
   // but show full title if there is none
-  
 
   return (
     <Head>
