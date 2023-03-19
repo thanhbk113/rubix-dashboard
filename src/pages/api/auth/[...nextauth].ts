@@ -11,8 +11,6 @@ const handleRefreshToken = async (token: JWT) => {
       refresh_token: token.refreshToken,
     });
 
-    console.log('refresh token here:', tokenData);
-
     const {
       access_token: accessToken,
       refresh_token: refreshToken,
@@ -65,7 +63,7 @@ export default NextAuth({
             const {
               access_token: accessToken,
               refresh_token: refreshToken,
-              expiresIn: accessTokenExpires,
+              expiresIn: expiresIn,
             } = res.data.token; //We get the access token and the refresh token from the data object.
 
             // const accessTokenExpirationTime =
@@ -75,7 +73,7 @@ export default NextAuth({
             return {
               ...res.data.user,
               accessToken,
-              accessTokenExpires,
+              expiresIn,
               refreshToken,
             };
             //return new object user contain token
@@ -98,19 +96,18 @@ export default NextAuth({
           user,
         };
       }
+      // const expiresInToken = token?.expiresIn;
+      // const expirationTime = expiresInToken.exp * 1000;
+      // const currentTime = Date.now();
 
-      const accessToken: any = token?.accessTokenExpires;
-      const expirationTime = accessToken.exp * 1000;
-      const currentTime = Date.now();
-
-      if (expirationTime && expirationTime - currentTime > 30 * 60 * 1000) {
-        // Token is still valid, just return it
-        return token;
-      }
+      // if (expirationTime && expirationTime - currentTime > 30 * 60 * 1000) {
+      // Token is still valid, just return it
+      //   return token;
+      // }
 
       // Token has expired or will expire in the next 30 minutes, refresh it
-      const refreshedToken = await handleRefreshToken(token);
-      return refreshedToken;
+      // const refreshedToken = await handleRefreshToken(token);
+      return token;
     },
     //The session() callback is called when a user logs in or log out
     async session({ session, token }) {
@@ -120,6 +117,9 @@ export default NextAuth({
           token,
         };
       }
+      // session.jwt = token.user;
+      // session.accessToken = token.accessToken;
+      // session.error = token.error;
       return session;
     },
   },

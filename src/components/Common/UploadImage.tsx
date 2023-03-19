@@ -1,19 +1,23 @@
 import WallpaperIcon from '@mui/icons-material/Wallpaper';
-import { useEffect, useState } from 'react';
+import { ChangeEvent } from 'react';
+import { useEffect } from 'react';
 
 import NextImage from '@/components/NextImage';
 
-const UploadImage = () => {
-  const [image, setImage] = useState<any>(null);
+interface Props {
+  images: string[];
+  setImage: (images: string[]) => void;
+}
 
+const UploadImage: React.FC<Props> = (props) => {
   useEffect(() => {
     return () => {
-      if (image) {
-        URL.revokeObjectURL(image.preview);
+      if (props.images) {
+        props.images.forEach((image) => URL.revokeObjectURL(image));
       }
     };
-  }, [image]);
-  const handleFileUpload = (e: any) => {
+  }, [props.images]);
+  const handleFileUpload = (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     const urls = [];
 
@@ -21,11 +25,11 @@ const UploadImage = () => {
       urls.push(URL.createObjectURL(files[i]));
     }
 
-    setImage(urls);
+    props.setImage(urls);
   };
   return (
     <div className='flex h-full flex-col items-center justify-center gap-2 rounded-xl bg-white p-10 shadow-lg'>
-      {image === null && (
+      {props.images.length < 1 && (
         <div className='flex flex-col items-center justify-center gap-2'>
           <input
             title='Upload Image(s)'
@@ -41,7 +45,7 @@ const UploadImage = () => {
         </div>
       )}
       <div className='grid w-full grid-cols-4 gap-6'>
-        {image?.map((url: any) => (
+        {props.images?.map((url) => (
           <div key={url}>
             <NextImage
               width={300}

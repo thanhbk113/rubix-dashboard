@@ -1,6 +1,4 @@
 import Autocomplete from '@mui/material/Autocomplete';
-import { styled } from '@mui/material/styles';
-import Switch from '@mui/material/Switch';
 import TextField from '@mui/material/TextField';
 import { useFormik } from 'formik';
 import { useEffect, useState } from 'react';
@@ -15,7 +13,6 @@ import Layout from '@/components/layout/Layout';
 
 import { CmsApi } from '@/api/cms-api';
 import { WithLayout } from '@/shared/types';
-import { Category } from '@/shared/types/categoryType';
 import { ReqItem } from '@/shared/types/itemType';
 
 interface A {
@@ -24,28 +21,14 @@ interface A {
 }
 
 const CreateProduct: WithLayout = () => {
-  const [description, setDescription] = useState<any>();
-  const [category, setCategory] = useState<Category[]>([]);
-  const [valueCategory, setValueCategory] = useState<any>();
-  const [cost, setCost] = useState<any>(0);
-  const [active, setActive] = useState<boolean>(false);
+  const [valueCategory, setValueCategory] = useState<string>('');
+  const [images, setImage] = useState<string[]>([]);
+  const [category, setCategory] = useState([]);
 
   const [message, setMessage] = useState<A>({
     isSuccess: null,
     message: '',
   });
-
-  const initialValues: ReqItem = {
-    name: '',
-    description: '',
-    price: 0,
-    cost: 0,
-    // images: [],
-    categoryId: '',
-    quantity: 0,
-    sku: '',
-    active: false,
-  };
 
   useEffect(() => {
     const getItem = async () => {
@@ -61,6 +44,18 @@ const CreateProduct: WithLayout = () => {
     getItem();
   }, []);
 
+  const initialValues: ReqItem = {
+    name: '',
+    description: '',
+    price: '',
+    cost: '',
+    images: [],
+    categoryId: '',
+    quantity: '',
+    details: '',
+    sku: '',
+  };
+
   const handleSelectValueDescription = (
     e: React.SyntheticEvent,
     value: any
@@ -68,70 +63,24 @@ const CreateProduct: WithLayout = () => {
     setValueCategory(value.id);
   };
 
-  const AntSwitch = styled(Switch)(({ theme }) => ({
-    width: 28,
-    height: 16,
-    padding: 0,
-    display: 'flex',
-    '&:active': {
-      '& .MuiSwitch-thumb': {
-        width: 15,
-      },
-      '& .MuiSwitch-switchBase.Mui-checked': {
-        transform: 'translateX(9px)',
-      },
-    },
-    '& .MuiSwitch-switchBase': {
-      padding: 2,
-      '&.Mui-checked': {
-        transform: 'translateX(12px)',
-        color: '#fff',
-        '& + .MuiSwitch-track': {
-          opacity: 1,
-          backgroundColor:
-            theme.palette.mode === 'dark' ? '#177ddc' : '#1890ff',
-        },
-      },
-    },
-    '& .MuiSwitch-thumb': {
-      boxShadow: '0 2px 4px 0 rgb(0 35 11 / 20%)',
-      width: 12,
-      height: 12,
-      borderRadius: 6,
-      transition: theme.transitions.create(['width'], {
-        duration: 200,
-      }),
-    },
-    '& .MuiSwitch-track': {
-      borderRadius: 16 / 2,
-      opacity: 1,
-      backgroundColor:
-        theme.palette.mode === 'dark'
-          ? 'rgba(255,255,255,.35)'
-          : 'rgba(0,0,0,.25)',
-      boxSizing: 'border-box',
-    },
-  }));
-
   const formik = useFormik({
     initialValues: initialValues,
-    onSubmit: async (values) => {
+    onSubmit: async (values, { setSubmitting, resetForm }) => {
       const reqCreateItem = {
         name: values.name,
-        description: description,
+        description: values.description,
         price: values.price,
-        cost: cost,
-        // images: values.image,
+        cost: values.cost,
+        images: images,
         categoryId: valueCategory,
         quantity: values.quantity,
+        details: values.details,
         sku: values.sku,
-        active: active,
       };
-
       console.log(reqCreateItem);
 
       try {
-        const res = await CmsApi.createItem(reqCreateItem);
+        const _ = await CmsApi.createItem(reqCreateItem);
         setMessage({
           isSuccess: true,
           message: 'Success',
@@ -146,6 +95,9 @@ const CreateProduct: WithLayout = () => {
           message: '',
         });
       }, 3000);
+
+      resetForm({});
+      setSubmitting(false);
     },
 
     validationSchema: Yup.object().shape({
@@ -177,7 +129,20 @@ const CreateProduct: WithLayout = () => {
           {formik.touched.name && formik.errors.name ? (
             <div className='text-sm text-light-error'>{formik.errors.name}</div>
           ) : null}
-
+          <div className='mb-2'>
+            <label htmlFor='' className='text-sm'>
+              Description
+            </label>
+            <textarea
+              name='description'
+              id='description'
+              className='h-20 w-full overflow-y-hidden rounded-lg border p-4 outline-none'
+              placeholder='Please write here ...'
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.description}
+            />
+          </div>
           <div className='w-full'>
             <label htmlFor='' className='text-sm'>
               SKU
@@ -227,9 +192,9 @@ const CreateProduct: WithLayout = () => {
               name='cost'
               type='number'
               placeholder='Enter Cost'
-              onChange={(e) => setCost(e.target.value)}
+              onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              value={cost}
+              value={formik.values.cost}
             />
             {formik.touched.cost && formik.errors.cost ? (
               <div className='text-sm text-light-error'>
@@ -286,15 +251,36 @@ const CreateProduct: WithLayout = () => {
             </div>
           ) : null}
 
-          <div className='my-10 h-full'>
-            <UploadImage />
+          <div className='mt-4'>
+            <label htmlFor='' className='text-sm'>
+              Detail
+            </label>
+            <textarea
+              name='details'
+              id='details'
+              cols={30}
+              rows={10}
+              className='h-40 w-full overflow-y-hidden rounded-lg border p-4 outline-none'
+              placeholder='Please write here ...'
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.details}
+            />
           </div>
+          <div className='my-10 h-full'>
+            <UploadImage images={images} setImage={setImage} />
+          </div>
+
           <div className='mt-10 flex justify-end'>
             <Button
               type='submit'
               large
               className='mb-4 w-[12%] rounded-lg bg-light-primary-light text-sm text-white hover:bg-light-primary-main hover:shadow-lg'
               title='SUBMIT'
+              onClick={() => {
+                setImage([]);
+                setValueCategory('');
+              }}
             />
           </div>
         </form>

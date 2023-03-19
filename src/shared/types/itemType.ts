@@ -1,13 +1,13 @@
 export interface ReqItem {
   name: string;
   description: string;
-  price: number;
-  cost: number;
-  // images: string[];
+  price: number | string;
+  cost: number | string;
+  images: string[];
   categoryId: string;
-  quantity: number;
+  quantity: number | string;
+  details: string;
   sku: string;
-  active: boolean;
 }
 
 export interface ResItem {
