@@ -10,7 +10,11 @@ import {
   ResRefreshToken,
   ResRegister,
 } from '../shared/types/authType';
-import { ResCategory } from '../shared/types/categoryType';
+import {
+  ReqCategories,
+  ResCategories,
+  ResCategory,
+} from '../shared/types/categoryType';
 import { ReqItem, ReqSearch, ResItem } from '../shared/types/itemType';
 import { ResGetRoles, ResGetUsers } from '../shared/types/rolesType';
 
@@ -45,6 +49,13 @@ export const CmsApi = {
   },
   createItem: (req: ReqItem) => {
     return axiosClient.post<ResItem>('/api/item/create', req);
+  },
+
+  createCategory: (req: ReqCategories) => {
+    return axiosClient.post<ResCategories>(
+      '/api/cat/create-parent-category',
+      req
+    );
   },
 
   getCategory: () => {

@@ -25,3 +25,24 @@ export interface Meta {
   hasPreviousPage: boolean;
   hasNextPage: boolean;
 }
+
+export interface ReqCategories {
+  image: string;
+  name: string;
+  description: string;
+  slug: string;
+  status: string;
+}
+
+export interface ResCategories {
+  image: string;
+  name: string;
+  description: string;
+  slug: string;
+  status: string;
+  deleted_at: null;
+  parentId: null;
+  id: string;
+  created_at: string;
+  updated_at: string;
+}

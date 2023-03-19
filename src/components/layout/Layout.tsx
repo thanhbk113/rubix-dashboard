@@ -31,6 +31,13 @@ const ListProductLabels = [
   },
 ];
 
+const ListCategoriesLabels = [
+  {
+    path: '/categories/create-category',
+    label: 'Create Category',
+  },
+];
+
 const ListRolesPermisstionLabels = [
   {
     path: '/roles-permission/roles',
@@ -116,6 +123,13 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           title='Roles & Permissions'
           isEnableArrowIcon={true}
           listRoutes={ListRolesPermisstionLabels}
+        />
+        <NavMenu
+          className=''
+          labelIcon={<GridViewIcon />}
+          title='Categories'
+          isEnableArrowIcon={true}
+          listRoutes={ListCategoriesLabels}
         />
       </div>
       <div className='flex h-screen flex-1 flex-col overflow-y-auto'>
