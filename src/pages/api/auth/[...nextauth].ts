@@ -1,40 +1,42 @@
 import NextAuth from 'next-auth';
-import { JWT } from 'next-auth/jwt';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
 import { CmsApi } from '@/api/cms-api';
-import { ERROR_TOKEN, ROUTES } from '@/constant';
 
-const handleRefreshToken = async (token: JWT) => {
-  try {
-    const tokenData = await CmsApi.refreshToken({
-      refresh_token: token.refreshToken,
-    });
+let userr = 0;
+let tokenn = 0;
+let sessionn = 0;
 
-    const {
-      access_token: accessToken,
-      refresh_token: refreshToken,
-      expiresIn: accessTokenExpires,
-    } = tokenData.data;
-    // const accessTokenExpirationTime =
-    //   (jwt_decode<JwtPayload>(accessToken).exp as number) * 1000 - 10;
-    return {
-      ...token,
-      accessToken,
-      accessTokenExpires,
-      refreshToken: refreshToken ?? token.refreshToken, // Fall back to old refresh token
-    };
-  } catch (error) {
-    console.log('error', error);
+// const handleRefreshToken = async (token: JWT) => {
+//   try {
+//     const tokenData = await CmsApi.refreshToken({
+//       refresh_token: token.refreshToken,
+//     });
 
-    return {
-      ...token,
-      error: ERROR_TOKEN,
-    };
-  }
-};
+//     const {
+//       access_token: accessToken,
+//       refresh_token: refreshToken,
+//       expiresIn: accessTokenExpires,
+//     } = tokenData.data;
+//     // const accessTokenExpirationTime =
+//     //   (jwt_decode<JwtPayload>(accessToken).exp as number) * 1000 - 10;
+//     return {
+//       ...token,
+//       accessToken,
+//       accessTokenExpires,
+//       refreshToken: refreshToken ?? token.refreshToken, // Fall back to old refresh token
+//     };
+//   } catch (error) {
+//     console.log('error', error);
 
-export default NextAuth({
+//     return {
+//       ...token,
+//       error: ERROR_TOKEN,
+//     };
+//   }
+// };
+
+export const nextAuthOptions = {
   // Configure one or more authentication providers
   providers: [
     CredentialsProvider({
@@ -49,7 +51,6 @@ export default NextAuth({
       },
       authorize: async (credentials) => {
         try {
-          //login
           if (!credentials) {
             return null;
           }
@@ -64,14 +65,13 @@ export default NextAuth({
               access_token: accessToken,
               refresh_token: refreshToken,
               expiresIn: expiresIn,
-            } = res.data.token; //We get the access token and the refresh token from the data object.
+            } = res.data.token;
 
-            // const accessTokenExpirationTime =
-            //   (jwt_decode<JwtPayload>(accessToken).exp as number) * 1000 - 10;
-            //minus 10 seconds before expiration time to prevent token expiration error in the browser side unit ms
-
+            const { id, email, username } = res.data.user;
             return {
-              ...res.data.user,
+              id,
+              email,
+              username,
               accessToken,
               expiresIn,
               refreshToken,
@@ -89,13 +89,23 @@ export default NextAuth({
   ],
   callbacks: {
     //The jwt() callback is called when a new token is created.
-    async jwt({ token, user }) {
-      if (user) {
-        return {
-          ...token,
-          user,
-        };
+    async jwt({ user, token }) {
+      if (userr < 2) {
+        userr++;
+        console.log('user', user);
       }
+      if (user) {
+        token.userId = user.id;
+        token.email = user.email;
+        token.username = user.username;
+      }
+
+      if (tokenn < 2) {
+        tokenn++;
+        console.log('token', token);
+      }
+
+      return token;
       // const expiresInToken = token?.expiresIn;
       // const expirationTime = expiresInToken.exp * 1000;
       // const currentTime = Date.now();
@@ -107,24 +117,22 @@ export default NextAuth({
 
       // Token has expired or will expire in the next 30 minutes, refresh it
       // const refreshedToken = await handleRefreshToken(token);
-      return token;
     },
     //The session() callback is called when a user logs in or log out
     async session({ session, token }) {
-      if (session) {
-        return {
-          ...session,
-          token,
-        };
+      if (sessionn < 2) {
+        sessionn++;
+        console.log('session', session);
       }
-      // session.jwt = token.user;
-      // session.accessToken = token.accessToken;
-      // session.error = token.error;
+      if (token) {
+        session.user.userId = token.userId;
+        session.user.email = token.email;
+        session.user.username = token.username;
+      }
+
       return session;
     },
   },
-  //The signIn page is the page that the user is redirected to when they are not logged in.
-  pages: {
-    signIn: ROUTES.LOGIN,
-  },
-});
+};
+
+export default NextAuth(nextAuthOptions);

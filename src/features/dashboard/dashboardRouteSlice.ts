@@ -1,6 +1,6 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
-import { RootState } from "../../app/store";
+import { RootState } from '../../app/store';
 
 interface initialStateDashboardRoute {
   activeLabel: string;
@@ -9,13 +9,13 @@ interface initialStateDashboardRoute {
 }
 
 const initialState: initialStateDashboardRoute = {
-  activeLabel: "",
+  activeLabel: '',
   isSlide: true,
   isShow: true,
 };
 
 const dashboardRouteSlice = createSlice({
-  name: "dashboardRoute",
+  name: 'dashboardRoute',
   initialState: initialState,
   reducers: {
     alo1234: (state, action) => {
@@ -24,7 +24,6 @@ const dashboardRouteSlice = createSlice({
 
     handleSlide: (state) => {
       state.isSlide = !state.isSlide;
-      console.log(state.isSlide);
     },
 
     handleShow: (state) => {
@@ -37,7 +36,8 @@ const dashboardRouteSlice = createSlice({
   },
 });
 
-export const selectIndexActive = (state: RootState) => state.dashboardRoute.activeLabel;
+export const selectIndexActive = (state: RootState) =>
+  state.dashboardRoute.activeLabel;
 export const selectIsSlide = (state: RootState) => state.dashboardRoute.isSlide;
 export const selectIsShow = (state: RootState) => state.dashboardRoute.isShow;
 

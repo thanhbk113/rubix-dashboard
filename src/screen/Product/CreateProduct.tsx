@@ -21,9 +21,12 @@ interface A {
 }
 
 const CreateProduct: WithLayout = () => {
+  console.log(1);
+
   const [valueCategory, setValueCategory] = useState<string>('');
   const [images, setImage] = useState<string[]>([]);
   const [category, setCategory] = useState([]);
+  const [error, setError] = useState();
 
   const [message, setMessage] = useState<A>({
     isSuccess: null,
@@ -37,7 +40,7 @@ const CreateProduct: WithLayout = () => {
 
         setCategory(res.data.data);
       } catch (error: any) {
-        console.log(error);
+        setError(error.data.message);
       }
     };
 
@@ -77,7 +80,6 @@ const CreateProduct: WithLayout = () => {
         details: values.details,
         sku: values.sku,
       };
-      console.log(reqCreateItem);
 
       try {
         const _ = await CmsApi.createItem(reqCreateItem);
@@ -288,6 +290,7 @@ const CreateProduct: WithLayout = () => {
 
       {message.isSuccess === true && <Alert title={message.message} success />}
       {message.isSuccess === false && <Alert title={message.message} error />}
+      <span>{error}</span>
     </div>
   );
 };

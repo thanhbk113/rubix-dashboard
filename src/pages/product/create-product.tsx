@@ -6,8 +6,10 @@ import { CreateProduct } from '@/screen/Product';
 
 export default CreateProduct;
 
-export const getServerSideProps: GetServerSideProps = requireAuth(async () => {
-  return {
-    props: {},
-  };
-});
+export const getServerSideProps: GetServerSideProps = requireAuth(
+  async (ctx) => {
+    return {
+      props: {},
+    };
+  }
+);

@@ -18,7 +18,7 @@ import {
 
 const ListLabels = [
   {
-    path: '/dashboard/ecommerce',
+    path: '/',
     exact: true,
     label: 'ECommerce',
   },

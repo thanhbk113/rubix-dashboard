@@ -31,7 +31,6 @@ const Register = () => {
 
         router.push(ROUTES.LOGIN);
       } catch (e: any) {
-        console.log(e.response.data);
         setError(e.response.data.error);
       }
     },

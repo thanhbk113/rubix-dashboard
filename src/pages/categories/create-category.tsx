@@ -6,8 +6,10 @@ import { CreateCategory } from '@/screen/Categories';
 
 export default CreateCategory;
 
-export const getServerSideProps: GetServerSideProps = requireAuth(async () => {
-  return {
-    props: {},
-  };
-});
+export const getServerSideProps: GetServerSideProps = requireAuth(
+  async (ctx) => {
+    return {
+      props: {},
+    };
+  }
+);
