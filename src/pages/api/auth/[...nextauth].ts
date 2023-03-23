@@ -3,10 +3,6 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 
 import { CmsApi } from '@/api/cms-api';
 
-let userr = 0;
-let tokenn = 0;
-let sessionn = 0;
-
 // const handleRefreshToken = async (token: JWT) => {
 //   try {
 //     const tokenData = await CmsApi.refreshToken({
@@ -80,8 +76,6 @@ export const nextAuthOptions = {
           }
           return null; //if the data is null, return null
         } catch (e: any) {
-          console.log('error:', e);
-
           throw new Error(e.response.data.message); //if the server response is an error, throw an error with the message from the server
         }
       },
@@ -90,19 +84,10 @@ export const nextAuthOptions = {
   callbacks: {
     //The jwt() callback is called when a new token is created.
     async jwt({ user, token }) {
-      if (userr < 2) {
-        userr++;
-        console.log('user', user);
-      }
       if (user) {
         token.userId = user.id;
         token.email = user.email;
         token.username = user.username;
-      }
-
-      if (tokenn < 2) {
-        tokenn++;
-        console.log('token', token);
       }
 
       return token;
@@ -120,10 +105,6 @@ export const nextAuthOptions = {
     },
     //The session() callback is called when a user logs in or log out
     async session({ session, token }) {
-      if (sessionn < 2) {
-        sessionn++;
-        console.log('session', session);
-      }
       if (token) {
         session.user.userId = token.userId;
         session.user.email = token.email;

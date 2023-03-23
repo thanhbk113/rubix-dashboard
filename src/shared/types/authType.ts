@@ -1,5 +1,5 @@
 export interface ResLogin {
-  data: { access_token: any; refresh_token: any };
+  data: { access_token: string; refresh_token: string };
   user: User;
   token: Token;
 }

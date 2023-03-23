@@ -8,7 +8,6 @@ export default Login;
 
 export async function getServerSideProps(context: NextPageContext) {
   const session = await getSession(context);
-  console.log('Login session', session);
 
   if (session) {
     return {

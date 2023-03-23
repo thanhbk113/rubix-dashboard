@@ -23,7 +23,7 @@ export interface ResItem {
 }
 
 export interface ReqSearch {
-  order?: string;
+  page?: string;
   search?: string;
   sort?: string;
   take?: number;
