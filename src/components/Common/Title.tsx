@@ -1,8 +1,7 @@
-import ArrowDownwardOutlinedIcon from "@mui/icons-material/ArrowDownwardOutlined";
-import { useState } from "react";
+import ArrowDownwardOutlinedIcon from '@mui/icons-material/ArrowDownwardOutlined';
+import { useState } from 'react';
 
 const Title = ({
-  width,
   title,
   isLast,
   handleSort,
@@ -20,20 +19,20 @@ const Title = ({
 
   return (
     <div
-      className="flex flex-row items-center justify-between h-full cursor-pointer"
+      className='flex h-full cursor-pointer flex-row items-center justify-between'
       onMouseEnter={handleHiddenSort}
       onMouseLeave={handleHiddenSort}
     >
-      <span className="text-xs text-light-text-secondary ml-5 h-full flex items-center gap-2">
+      <span className='ml-5 flex h-full items-center gap-2 text-xs text-light-text-secondary'>
         <span>{title}</span>
         {hiddenSort && (
-          <span className="cursor-pointer" onClick={() => handleSort()}>
-            <ArrowDownwardOutlinedIcon style={{ fontSize: "20px" }} />
+          <span className='cursor-pointer' onClick={() => handleSort()}>
+            <ArrowDownwardOutlinedIcon style={{ fontSize: '20px' }} />
           </span>
         )}
       </span>
 
-      {!isLast && <span className="text-gray-300">|</span>}
+      {!isLast && <span className='text-gray-300'>|</span>}
     </div>
   );
 };

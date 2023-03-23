@@ -1,6 +1,6 @@
 import KeyboardArrowLeftOutlinedIcon from '@mui/icons-material/KeyboardArrowLeftOutlined';
 import KeyboardArrowRightOutlinedIcon from '@mui/icons-material/KeyboardArrowRightOutlined';
-import { FormControl, MenuItem, Select } from '@mui/material';
+import { FormControl } from '@mui/material';
 import { FC, useEffect, useState } from 'react';
 
 interface ITablePagination {
@@ -52,7 +52,7 @@ const TablePagination: FC<ITablePagination> = ({ pagination, handleSort }) => {
     <div className='mr-8 flex h-16 w-full items-center justify-end gap-4'>
       <span>Rows per page:</span>
       <FormControl fullWidth style={{ width: '66px' }}>
-        <Select
+        {/* <Select
           sx={{
             '& .MuiSelect-select .notranslate::after': 'placeholder'
               ? {
@@ -75,7 +75,7 @@ const TablePagination: FC<ITablePagination> = ({ pagination, handleSort }) => {
           <MenuItem value={10}>10</MenuItem>
           <MenuItem value={25}>25</MenuItem>
           <MenuItem value={50}>50</MenuItem>
-        </Select>
+        </Select> */}
       </FormControl>
       <span>
         {valueLeftPage}-{valueRightPage} of {pagination}
