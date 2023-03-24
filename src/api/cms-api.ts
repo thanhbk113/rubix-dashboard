@@ -42,9 +42,9 @@ export const CmsApi = {
     return axiosClient.get<ResGetRoles>('/api/auth/roles');
   },
 
-  getUsers: ({ sort, order, search, take }: ReqSearch) => {
+  getUsers: ({ sort, search, take }: ReqSearch) => {
     return axiosClient.get<ResGetUsers>('/api/users/all', {
-      params: { sort, order, search, take },
+      params: { sort, search, take },
     });
   },
   createItem: (req: ReqItem) => {
