@@ -148,7 +148,7 @@ const Login = () => {
             {/* {!isLoading ? (
               <Button
                 type='submit'
-                large
+                large={true}
                 className='bg-light-primary-light  hover:bg-light-primary-main mb-4 rounded-lg text-sm text-white hover:shadow-lg'
                 title='LOGIN'
               />
@@ -165,7 +165,7 @@ const Login = () => {
 
             <Button
               type='submit'
-              large
+              large={true}
               className='mb-4  rounded-lg bg-light-primary-light text-sm text-white hover:bg-light-primary-main hover:shadow-lg'
               title='LOGIN'
             />

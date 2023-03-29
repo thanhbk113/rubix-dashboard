@@ -134,7 +134,7 @@ const Register = () => {
             {/* {!isLoading ? (
               <Button
                 type='submit'
-                large
+                large={true}
                 className='rounded-lg bg-light-primary-light text-sm text-white hover:bg-light-primary-main hover:shadow-lg'
                 title='Register'
               />
@@ -150,7 +150,7 @@ const Register = () => {
             )} */}
             <Button
               type='submit'
-              large
+              large={true}
               className='rounded-lg bg-light-primary-light text-sm text-white hover:bg-light-primary-main hover:shadow-lg'
               title='Register'
             />

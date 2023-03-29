@@ -1,18 +1,16 @@
-import WallpaperIcon from '@mui/icons-material/Wallpaper';
 import { Stack } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import Switch from '@mui/material/Switch';
 import { useFormik } from 'formik';
 import { useState } from 'react';
-import { ChangeEvent } from 'react';
 import * as Yup from 'yup';
 
 import Auth from '@/components/Auth';
 import Alert from '@/components/Common/Alert';
 import Button from '@/components/Common/Button';
 import Input from '@/components/Common/Input';
+import UploadImage from '@/components/Common/UploadImage';
 import Layout from '@/components/layout/Layout';
-import NextImage from '@/components/NextImage';
 
 import { CmsApi } from '@/api/cms-api';
 import { WithLayout } from '@/shared/types';
@@ -24,19 +22,13 @@ interface A {
 }
 
 const CreateCategory: WithLayout = () => {
-  const [image, setImage] = useState<string>('');
   const [active, setActive] = useState<boolean>(false);
+  const [images, setImage] = useState<File[]>([]);
   const [message, setMessage] = useState<A>({
     isSuccess: null,
     message: '',
   });
-
-  const handleFileUpload = (e: ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files[0];
-    const photo = URL.createObjectURL(files);
-
-    setImage(photo);
-  };
+  console.log(images);
 
   const initialValues: ReqCategories = {
     name: '',
@@ -49,17 +41,20 @@ const CreateCategory: WithLayout = () => {
   const formik = useFormik({
     initialValues: initialValues,
     onSubmit: async (values, { setSubmitting, resetForm }) => {
-      const reqCreateCategory = {
+      const reqCreateCategory: ReqCategories = {
         name: values.name,
         description: values.description,
-        image: image,
         slug: values.slug,
+        image: '',
         status: values.status,
       };
 
-      console.log(reqCreateCategory);
-
       try {
+        const res = await CmsApi.uploadFiles({ files: images });
+        console.log(res.data.urls);
+
+        reqCreateCategory.image = res.data.urls[0];
+
         const _ = await CmsApi.createCategory(reqCreateCategory);
         setMessage({
           isSuccess: true,
@@ -68,13 +63,6 @@ const CreateCategory: WithLayout = () => {
       } catch (error: any) {
         setMessage({ message: error.data.message, isSuccess: false });
       }
-
-      setTimeout(() => {
-        setMessage({
-          isSuccess: null,
-          message: '',
-        });
-      }, 3000);
 
       resetForm({});
       setSubmitting(false);
@@ -136,7 +124,11 @@ const CreateCategory: WithLayout = () => {
     <div className='mx-10 h-full gap-6'>
       <div className='rounded-xl bg-white px-10 py-8 font-semibold text-light-text-primary  shadow-lg'>
         <h2 className='mb-4 text-xl'>Create Category</h2>
-        <form onSubmit={formik.handleSubmit} className='w-full'>
+        <form
+          onSubmit={formik.handleSubmit}
+          className='w-full'
+          encType='multipart/form-data'
+        >
           <label htmlFor='' className='text-sm'>
             Category Name
           </label>
@@ -220,44 +212,15 @@ const CreateCategory: WithLayout = () => {
           </div>
 
           <div className='my-10 h-full'>
-            <div className='flex h-full flex-col items-center justify-center gap-2 rounded-xl bg-white p-10 shadow-lg'>
-              {!image ? (
-                <div className='flex flex-col items-center justify-center gap-2'>
-                  <input
-                    title='Upload Image(s)'
-                    type='file'
-                    onChange={handleFileUpload}
-                    className=''
-                    multiple
-                  />
-                  <WallpaperIcon />
-                  <h2 className='text-sm text-light-text-primary'>
-                    PNJ, JPG & GIF ACCEPTED
-                  </h2>
-                </div>
-              ) : (
-                <div className='flex items-center justify-center'>
-                  <NextImage
-                    width={300}
-                    height={300}
-                    src={image}
-                    alt=''
-                    className='h-full w-full'
-                  />
-                </div>
-              )}
-            </div>
+            <UploadImage multiple={false} images={images} setImage={setImage} />
           </div>
 
           <div className='mt-10 flex justify-end'>
             <Button
               type='submit'
-              large
+              large={true}
               className='mb-4 w-[12%] rounded-lg bg-light-primary-light text-sm text-white hover:bg-light-primary-main hover:shadow-lg'
               title='SUBMIT'
-              onClick={() => {
-                setImage('');
-              }}
             />
           </div>
         </form>

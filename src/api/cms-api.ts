@@ -1,6 +1,7 @@
 import { AxiosResponse } from 'axios';
 
 import axiosClient from '@/api/axiosClient';
+import { ReqUploadFiles, ResUploadFiles } from '@/shared/types/uploadType';
 
 import {
   ReqLogin,
@@ -60,5 +61,17 @@ export const CmsApi = {
 
   getCategory: () => {
     return axiosClient.get<ResCategory>('/api/cat');
+  },
+
+  uploadFiles: (props: ReqUploadFiles) => {
+    const formData = new FormData();
+    props.files.forEach((file) => {
+      formData.append('files', file);
+    });
+    return axiosClient.post<ResUploadFiles>('/api/upload', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
   },
 };

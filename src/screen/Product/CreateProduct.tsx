@@ -21,10 +21,8 @@ interface A {
 }
 
 const CreateProduct: WithLayout = () => {
-  console.log(1);
-
   const [valueCategory, setValueCategory] = useState<string>('');
-  const [images, setImage] = useState<string[]>([]);
+  const [images, setImage] = useState<File[]>([]);
   const [category, setCategory] = useState([]);
   const [error, setError] = useState();
 
@@ -66,15 +64,17 @@ const CreateProduct: WithLayout = () => {
     setValueCategory(value.id);
   };
 
+  console.log(images);
+
   const formik = useFormik({
     initialValues: initialValues,
     onSubmit: async (values, { setSubmitting, resetForm }) => {
-      const reqCreateItem = {
+      const reqCreateItem: ReqItem = {
         name: values.name,
         description: values.description,
         price: values.price,
         cost: values.cost,
-        images: images,
+        images: [],
         categoryId: valueCategory,
         quantity: values.quantity,
         details: values.details,
@@ -82,6 +82,11 @@ const CreateProduct: WithLayout = () => {
       };
 
       try {
+        const res = await CmsApi.uploadFiles({ files: images });
+
+        if (res.data.urls.length > 0) {
+          reqCreateItem.images = res.data.urls;
+        }
         const _ = await CmsApi.createItem(reqCreateItem);
         setMessage({
           isSuccess: true,
@@ -98,6 +103,8 @@ const CreateProduct: WithLayout = () => {
         });
       }, 3000);
 
+      setImage([]);
+      setValueCategory('');
       resetForm({});
       setSubmitting(false);
     },
@@ -270,19 +277,15 @@ const CreateProduct: WithLayout = () => {
             />
           </div>
           <div className='my-10 h-full'>
-            <UploadImage images={images} setImage={setImage} />
+            <UploadImage multiple={true} images={images} setImage={setImage} />
           </div>
 
           <div className='mt-10 flex justify-end'>
             <Button
               type='submit'
-              large
+              large={true}
               className='mb-4 w-[12%] rounded-lg bg-light-primary-light text-sm text-white hover:bg-light-primary-main hover:shadow-lg'
               title='SUBMIT'
-              onClick={() => {
-                setImage([]);
-                setValueCategory('');
-              }}
             />
           </div>
         </form>

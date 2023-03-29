@@ -3,9 +3,6 @@ import axios from 'axios';
 import { BASE_URL_API } from '@/constant';
 const axiosClient = axios.create({
   baseURL: BASE_URL_API,
-  headers: {
-    'Content-Type': 'application/json',
-  },
 });
 
 axiosClient.interceptors.request.use(

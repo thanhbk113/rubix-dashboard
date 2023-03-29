@@ -12,12 +12,12 @@ interface IButton
 // { title, small, large, className = "", onClick, type }
 
 const Button: FC<IButton> = (props) => {
-  const { title, children, ...parentAttributes } = props;
+  const { title, small, large, children, ...parentAttributes } = props;
 
   const width = () => {
-    if (props.small) {
+    if (small) {
       return 'w-[20%] h-[60px]';
-    } else if (props.large) {
+    } else if (large) {
       return 'w-full h-[42px] ';
     }
     return '';

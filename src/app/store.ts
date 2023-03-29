@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import dashboardRouteReducer from '../features/dashboard/dashboardRouteSlice';
+import dashboardRouteSlice from '@/features/dashboard/dashboardRouteSlice';
+import uploadSlice from '@/features/uploadImage';
 
 export const store = configureStore({
   reducer: {
-    dashboardRoute: dashboardRouteReducer,
+    upload: uploadSlice,
+    dashboardRoute: dashboardRouteSlice,
   },
 });
 

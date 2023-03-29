@@ -8,7 +8,6 @@ const Auth = ({ children }: Props) => {
   const { data: session } = useSession();
 
   useEffect(() => {
-    console.log('có hay  ko session', session);
     if (!session) {
       return;
     }
