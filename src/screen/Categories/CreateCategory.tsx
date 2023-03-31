@@ -64,6 +64,7 @@ const CreateCategory: WithLayout = () => {
         setMessage({ message: error.data.message, isSuccess: false });
       }
 
+      setImage([]);
       resetForm({});
       setSubmitting(false);
     },

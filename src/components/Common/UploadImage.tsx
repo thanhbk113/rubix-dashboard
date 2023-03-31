@@ -4,9 +4,6 @@ import { ChangeEvent, FC, useState } from 'react';
 
 import NextImage from '@/components/NextImage';
 
-import { useAppDispatch, useAppSelector } from '@/app/hooks';
-import { selectValueImage } from '@/features/uploadImage';
-
 interface UploadImageProps {
   images: File[];
   setImage: (images: File[]) => void;
@@ -22,14 +19,13 @@ interface ImageItemProps {
 
 const ImageItem: FC<ImageItemProps> = (props) => {
   const [ishover, setIshover] = useState<boolean>(false);
-  const dispatch = useAppDispatch();
-  const setValueImage = useAppSelector(selectValueImage);
+  const [uploadImage, setUploadImage] = useState<File>();
 
   const isShowUpdateImage = () => {
     setIshover(!ishover);
   };
 
-  const handleDeleteImage = (idx: number) => {
+  const handleDeleteImage = () => {
     const newImages = props.images.filter((_, index) => index !== props.idx);
     props.setImage(newImages);
   };
@@ -42,20 +38,29 @@ const ImageItem: FC<ImageItemProps> = (props) => {
       <NextImage
         width={300}
         height={300}
-        src={URL.createObjectURL(props.file)}
+        src={URL.createObjectURL(uploadImage || props.file)}
         alt=''
         className='h-full w-full'
       />
       <span
         className='absolute top-0 right-0 z-20 cursor-pointer'
-        onClick={() => handleDeleteImage(props.idx)}
+        onClick={handleDeleteImage}
       >
         <HighlightOffIcon />
       </span>
       {ishover && (
-        <span className='absolute top-1/2 left-1/2 z-10 flex h-full w-full -translate-x-1/2 -translate-y-1/2 cursor-pointer items-center justify-center bg-black opacity-20'>
-          <WallpaperIcon className=' text-white' />
-        </span>
+        <div className='absolute top-1/2 left-1/2 z-10 flex h-full w-full -translate-x-1/2 -translate-y-1/2 items-center justify-center bg-black opacity-20'>
+          <input
+            type='file'
+            className='absolute top-1/2 left-1/2 z-20 h-12 w-12 -translate-x-1/2 -translate-y-1/2 cursor-pointer opacity-0'
+            onChange={(e) => {
+              if (e.target.files) {
+                setUploadImage(e.target.files[0]);
+              }
+            }}
+          />
+          <WallpaperIcon className=' absolute top-1/2 left-1/2 h-12 w-12 -translate-x-1/2 -translate-y-1/2 cursor-pointer text-white' />
+        </div>
       )}
     </div>
   );

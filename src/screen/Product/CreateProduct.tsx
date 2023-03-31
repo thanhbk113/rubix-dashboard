@@ -13,6 +13,7 @@ import Layout from '@/components/layout/Layout';
 
 import { CmsApi } from '@/api/cms-api';
 import { WithLayout } from '@/shared/types';
+import { Category } from '@/shared/types/categoryType';
 import { ReqItem } from '@/shared/types/itemType';
 
 interface A {
@@ -23,7 +24,7 @@ interface A {
 const CreateProduct: WithLayout = () => {
   const [valueCategory, setValueCategory] = useState<string>('');
   const [images, setImage] = useState<File[]>([]);
-  const [category, setCategory] = useState([]);
+  const [category, setCategory] = useState<Category[]>([]);
   const [error, setError] = useState();
 
   const [message, setMessage] = useState<A>({
@@ -35,6 +36,7 @@ const CreateProduct: WithLayout = () => {
     const getItem = async () => {
       try {
         const res = await CmsApi.getCategory();
+        console.log(res.data);
 
         setCategory(res.data.data);
       } catch (error: any) {

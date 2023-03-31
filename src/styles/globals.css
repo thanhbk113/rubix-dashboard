@@ -34,6 +34,12 @@ input[type='number'] {
   -moz-appearance: textfield;
 }
 
+input[type=file], /* FF, IE7+, chrome (except button) */
+input[type=file]::-webkit-file-upload-button {
+  /* chromes and blink button */
+  cursor: pointer;
+}
+
 @layer base {
   .cursor-newtab {
     cursor: url('/images/new-tab.png') 10 10, pointer;
