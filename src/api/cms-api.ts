@@ -52,6 +52,10 @@ export const CmsApi = {
     return axiosClient.post<ResItem>('/api/item/create', req);
   },
 
+  deleteItem: (id: string) => {
+    return axiosClient.delete<ResItem>(`/api/item/${id}`);
+  },
+
   createCategory: (req: ReqCategories) => {
     return axiosClient.post<ResCategories>(
       '/api/cat/create-parent-category',
@@ -61,6 +65,12 @@ export const CmsApi = {
 
   getCategory: () => {
     return axiosClient.get<ResCategory>('/api/cat');
+  },
+
+  getListItems: ({ sort, page, take }: ReqSearch) => {
+    return axiosClient.get<ResItem>('/api/item/search', {
+      params: { sort, page, take },
+    });
   },
 
   uploadFiles: (props: ReqUploadFiles) => {

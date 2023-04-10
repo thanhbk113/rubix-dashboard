@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '@/app/store';
 
 interface InitialState {
-  valueImage: File;
+  valueImage: File | null;
 }
 
 const initialState: InitialState = {

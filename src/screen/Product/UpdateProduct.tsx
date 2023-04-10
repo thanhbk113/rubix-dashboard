@@ -113,17 +113,13 @@ const CreateProduct: WithLayout = () => {
 
     validationSchema: Yup.object().shape({
       name: Yup.string().required('You must enter your name.'),
-      price: Yup.string().required('You must enter your price.'),
-      cost: Yup.string().required('You must enter your cost.'),
-      quantity: Yup.string().required('You must enter your quantity.'),
-      // sku: Yup.string().required('You must enter your sku.'),
     }),
   });
 
   return (
     <div className='mx-10 h-full gap-6'>
       <div className='rounded-xl bg-white px-10 py-8 font-semibold text-light-text-primary  shadow-lg'>
-        <h2 className='mb-4 text-xl'>Create Product</h2>
+        <h2 className='mb-4 text-xl'>Update Product</h2>
         <form onSubmit={formik.handleSubmit} className='w-full'>
           <label htmlFor='' className='text-sm'>
             Product Name

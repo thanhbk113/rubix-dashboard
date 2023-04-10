@@ -26,8 +26,16 @@ const ListLabels = [
 
 const ListProductLabels = [
   {
+    path: '/product/list-product',
+    label: 'List Product',
+  },
+  {
     path: '/product/create-product',
     label: 'Create Product',
+  },
+  {
+    path: '/product/update-product',
+    label: 'Update Product',
   },
 ];
 
