@@ -6,10 +6,8 @@ import { UpdateProduct } from '@/screen/Product';
 
 export default UpdateProduct;
 
-export const getServerSideProps: GetServerSideProps = requireAuth(
-  async (ctx) => {
-    return {
-      props: {},
-    };
-  }
-);
+export const getServerSideProps: GetServerSideProps = requireAuth(async () => {
+  return {
+    props: {},
+  };
+});
