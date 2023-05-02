@@ -6,7 +6,6 @@ import { CmsApi } from '@/api/cms-api';
 import { ERROR_TOKEN } from '@/constant';
 
 const handleRefreshToken = async (token: JWT) => {
-  console.log('có chạy token', token);
   try {
     const tokenData = await CmsApi.refreshToken({
       refresh_token: token.refreshToken,
@@ -17,8 +16,7 @@ const handleRefreshToken = async (token: JWT) => {
       refresh_token: refreshToken,
       expiresIn: accessTokenExpires,
     } = tokenData.data;
-    // const accessTokenExpirationTime =
-    //   (jwt_decode<JwtPayload>(accessToken).exp as number) * 1000 - 10;
+
     return {
       ...token,
       accessToken,
