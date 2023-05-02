@@ -48,7 +48,7 @@ const Login = () => {
 
       if (res?.ok) {
         // setIsLoading(false);
-        router.push('/');
+        router.push('/product/list-product');
         // message.success('Login successfully');
       }
     },
