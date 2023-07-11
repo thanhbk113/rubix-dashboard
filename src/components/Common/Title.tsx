@@ -13,15 +13,18 @@ const Title = ({
 }) => {
   const [hiddenSort, setHiddenSort] = useState<boolean>(false);
 
-  const handleHiddenSort = () => {
-    setHiddenSort(!hiddenSort);
+  const handleOpenSort = () => {
+    setHiddenSort(true);
+  };
+  const handleCloseSort = () => {
+    setHiddenSort(false);
   };
 
   return (
     <div
       className='flex h-full cursor-pointer flex-row items-center justify-between'
-      onMouseEnter={handleHiddenSort}
-      onMouseLeave={handleHiddenSort}
+      onMouseEnter={handleOpenSort}
+      onMouseLeave={handleCloseSort}
     >
       <span className='ml-5 flex h-full items-center gap-2 text-xs text-light-text-secondary'>
         <span>{title}</span>

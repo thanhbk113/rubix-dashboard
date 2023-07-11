@@ -1,15 +1,19 @@
-import Auth from '@/components/Auth';
+import dynamic from 'next/dynamic';
+
 import Layout from '@/components/layout/Layout';
 
+const Dashboard = dynamic(() => import('@/screen/Dashboards'), {
+  ssr: false,
+});
 import { WithLayout } from '@/shared/types';
 
 const Home: WithLayout = () => {
-  return <div>Home</div>;
+  return (
+    <div>
+      <Dashboard />
+    </div>
+  );
 };
 
-Home.getLayout = (page) => (
-  <Layout>
-    <Auth>{page}</Auth>
-  </Layout>
-);
+Home.getLayout = (page) => <Layout>{page}</Layout>;
 export default Home;

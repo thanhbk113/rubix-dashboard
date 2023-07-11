@@ -48,13 +48,17 @@ const ListCategoriesLabels = [
 
 const ListRolesPermisstionLabels = [
   {
-    path: '/roles-permission/roles',
+    path: '/roles',
     exact: true,
     label: 'Roles',
   },
+];
+
+const ListUser = [
   {
-    path: '/roles-permission/permissions',
-    label: 'Permissions',
+    path: '/user',
+    exact: true,
+    label: 'Users',
   },
 ];
 
@@ -118,6 +122,13 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           </div>
         ) : null}
 
+        <NavMenu
+          className=''
+          labelIcon={<GridViewIcon />}
+          title='User'
+          isEnableArrowIcon={true}
+          listRoutes={ListUser}
+        />
         <NavMenu
           className=''
           labelIcon={<GridViewIcon />}

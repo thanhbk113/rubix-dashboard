@@ -1,6 +1,7 @@
-import { Home } from '@/screen';
+import { Roles } from '@/screen/User';
 
-export default Home;
+export default Roles;
+
 // export const getServerSideProps: GetServerSideProps = requireAuth(async () => {
 //   return {
 //     props: {},
