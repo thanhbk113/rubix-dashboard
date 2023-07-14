@@ -1,9 +1,8 @@
 import { IosShare } from '@mui/icons-material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { Checkbox, FormControl, MenuItem, Select } from '@mui/material';
+import { Checkbox } from '@mui/material';
 import React, { useEffect } from 'react';
 
-import { RoleCard } from '@/components/Common/RoleCard';
 import TablePagination from '@/components/Common/TablePagination';
 import Title from '@/components/Common/Title';
 import Layout from '@/components/layout/Layout';
@@ -12,10 +11,10 @@ import { WithLayout } from '@/shared/types';
 
 import { CmsApi } from '../../api/cms-api';
 import { ReqSearch } from '../../shared/types/itemType';
-import { ResRoles, User } from '../../shared/types/rolesType';
+import { User } from '../../shared/types/rolesType';
 
 const Roles: WithLayout = () => {
-  const [roles, setRoles] = React.useState<ResRoles[]>([]);
+  // const [roles, setRoles] = React.useState<ResRoles[]>([]);
   const [users, setUser] = React.useState<User[]>([]);
   const [pagination, setPagination] = React.useState<any>(1);
 
@@ -29,9 +28,9 @@ const Roles: WithLayout = () => {
   };
 
   useEffect(() => {
-    CmsApi.getRoles().then((res) => {
-      setRoles(res.data.data);
-    });
+    // CmsApi.getRoles().then((res) => {
+    //   setRoles(res.data.data);
+    // });
 
     CmsApi.getUsers({}).then((res) => {
       setUser(res.data.data);
@@ -41,7 +40,7 @@ const Roles: WithLayout = () => {
 
   return (
     <div className='w-full bg-light-background-body px-16 py-10'>
-      <div className='mb-5'>
+      {/* <div className='mb-5'>
         <h1 className='text-2xl font-medium text-light-text-primary'>
           Roles List
         </h1>
@@ -69,7 +68,7 @@ const Roles: WithLayout = () => {
           Find all of your company's administrator accounts and their associate
           roles.
         </span>
-      </div>
+      </div> */}
       <div className='w-full rounded-xl bg-white shadow-lg '>
         <div className='h-24 w-full'>
           <div className='mx-5 flex h-full flex-row items-center justify-between'>
@@ -85,7 +84,7 @@ const Roles: WithLayout = () => {
                 className='mr-5 h-10 w-[600px] rounded-lg border border-light-borderColor px-5 font-medium text-light-text-secondary outline-light-primary-light'
                 onChange={(e) => handleSort({ search: e.target.value })}
               ></input>
-              <FormControl fullWidth style={{ width: '150px' }}>
+              {/* <FormControl fullWidth style={{ width: '150px' }}>
                 <Select
                   sx={{
                     // eslint-disable-next-line no-constant-condition
@@ -112,7 +111,7 @@ const Roles: WithLayout = () => {
                     </MenuItem>
                   ))}
                 </Select>
-              </FormControl>
+              </FormControl> */}
             </div>
           </div>
         </div>
@@ -179,13 +178,13 @@ const Roles: WithLayout = () => {
                 </td>
                 <td className='col-span-2 flex items-center justify-between pl-5'>
                   <div className='flex items-center gap-2'>
-                    <span className='h-[36px] w-[36px] rounded-full'>
+                    {/* <span className='h-[36px] w-[36px] rounded-full'>
                       <img
                         className='h-full w-full rounded-full'
                         src={user.avatar}
                         alt=''
                       />
-                    </span>
+                    </span> */}
                     <span>{user.username}</span>
                   </div>
                 </td>

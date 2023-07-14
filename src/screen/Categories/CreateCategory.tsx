@@ -3,10 +3,9 @@ import { styled } from '@mui/material/styles';
 import Switch from '@mui/material/Switch';
 import { useFormik } from 'formik';
 import { useState } from 'react';
+import { toast, ToastContainer } from 'react-toastify';
 import * as Yup from 'yup';
 
-import Auth from '@/components/Auth';
-import Alert from '@/components/Common/Alert';
 import Button from '@/components/Common/Button';
 import Input from '@/components/Common/Input';
 import UploadImage from '@/components/Common/UploadImage';
@@ -56,12 +55,14 @@ const CreateCategory: WithLayout = () => {
         reqCreateCategory.image = res.data.urls[0];
 
         const _ = await CmsApi.createCategory(reqCreateCategory);
-        setMessage({
-          isSuccess: true,
-          message: 'Success',
-        });
+        toast.success('Create category successfully!');
+        // setMessage({
+        //   isSuccess: true,
+        //   message: 'Success',
+        // });
       } catch (error: any) {
-        setMessage({ message: error.data.message, isSuccess: false });
+        toast.error(error.data.message);
+        // setMessage({ message: error.data.message, isSuccess: false });
       }
 
       setImage([]);
@@ -226,17 +227,14 @@ const CreateCategory: WithLayout = () => {
           </div>
         </form>
       </div>
+      <ToastContainer />
 
-      {message.isSuccess === true && <Alert title={message.message} success />}
-      {message.isSuccess === false && <Alert title={message.message} error />}
+      {/* {message.isSuccess === true && <Alert title={message.message} success />}
+      {message.isSuccess === false && <Alert title={message.message} error />} */}
     </div>
   );
 };
 
-CreateCategory.getLayout = (page) => (
-  <Layout>
-    <Auth>{page}</Auth>
-  </Layout>
-);
+CreateCategory.getLayout = (page) => <Layout>{page}</Layout>;
 
 export default CreateCategory;

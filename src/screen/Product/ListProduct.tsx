@@ -3,7 +3,6 @@ import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArro
 import Link from 'next/link';
 import { FC, useEffect, useState } from 'react';
 
-import Auth from '@/components/Auth';
 import Button from '@/components/Common/Button';
 import Layout from '@/components/layout/Layout';
 import NextImage from '@/components/NextImage';
@@ -196,10 +195,6 @@ const ListProduct: WithLayout = () => {
   );
 };
 
-ListProduct.getLayout = (page) => (
-  <Layout>
-    <Auth> {page}</Auth>
-  </Layout>
-);
+ListProduct.getLayout = (page) => <Layout>{page}</Layout>;
 
 export default ListProduct;

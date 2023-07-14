@@ -4,7 +4,6 @@ import { useFormik } from 'formik';
 import { useEffect, useState } from 'react';
 import * as Yup from 'yup';
 
-import Auth from '@/components/Auth';
 import Alert from '@/components/Common/Alert';
 import Button from '@/components/Common/Button';
 import Input from '@/components/Common/Input';
@@ -292,10 +291,6 @@ const CreateProduct: WithLayout = () => {
   );
 };
 
-CreateProduct.getLayout = (page) => (
-  <Layout>
-    <Auth>{page}</Auth>
-  </Layout>
-);
+CreateProduct.getLayout = (page) => <Layout>{page}</Layout>;
 
 export default CreateProduct;

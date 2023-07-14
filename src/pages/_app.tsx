@@ -5,6 +5,7 @@ import { SessionProvider } from 'next-auth/react';
 import { ReactElement, ReactNode } from 'react';
 import { Provider } from 'react-redux';
 
+import 'react-toastify/dist/ReactToastify.css';
 import '@/styles/globals.css';
 import '@/styles/colors.css';
 
@@ -22,7 +23,7 @@ type AppPropsWithLayout = AppProps & {
 const appTheme = ukoTheme();
 
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
-  const getLayout = Component.getLayout ?? ((page) => page);
+  const getLayout = Component.getLayout || ((page) => page);
   return (
     <SessionProvider session={pageProps.session}>
       <Provider store={store}>

@@ -2,10 +2,9 @@ import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import { useFormik } from 'formik';
 import { useEffect, useState } from 'react';
+import { toast, ToastContainer } from 'react-toastify';
 import * as Yup from 'yup';
 
-import Auth from '@/components/Auth';
-import Alert from '@/components/Common/Alert';
 import Button from '@/components/Common/Button';
 import Input from '@/components/Common/Input';
 import UploadImage from '@/components/Common/UploadImage';
@@ -16,27 +15,16 @@ import { WithLayout } from '@/shared/types';
 import { Category } from '@/shared/types/categoryType';
 import { ReqItem } from '@/shared/types/itemType';
 
-interface A {
-  isSuccess: boolean | null;
-  message: string;
-}
-
 const CreateProduct: WithLayout = () => {
-  const [valueCategory, setValueCategory] = useState<string>('');
+  const [valueCategory, setValueCategory] = useState<string[]>([]);
   const [images, setImage] = useState<File[]>([]);
   const [category, setCategory] = useState<Category[]>([]);
   const [error, setError] = useState();
-
-  const [message, setMessage] = useState<A>({
-    isSuccess: null,
-    message: '',
-  });
 
   useEffect(() => {
     const getItem = async () => {
       try {
         const res = await CmsApi.getCategory();
-        console.log(res.data);
 
         setCategory(res.data.data);
       } catch (error: any) {
@@ -53,20 +41,19 @@ const CreateProduct: WithLayout = () => {
     price: '',
     cost: '',
     images: [],
-    categoryId: '',
+    categoriesId: [],
     quantity: '',
     details: '',
-    // sku: '',
+    stock: '',
+    active: true,
   };
 
   const handleSelectValueDescription = (
     e: React.SyntheticEvent,
-    value: any
+    value: Category
   ) => {
-    setValueCategory(value.id);
+    setValueCategory((prev) => [...prev, value.id]);
   };
-
-  console.log(images);
 
   const formik = useFormik({
     initialValues: initialValues,
@@ -77,10 +64,11 @@ const CreateProduct: WithLayout = () => {
         price: values.price,
         cost: values.cost,
         images: [],
-        categoryId: valueCategory,
+        categoriesId: valueCategory,
         quantity: values.quantity,
         details: values.details,
-        // sku: values.sku,
+        stock: values.stock,
+        active: true,
       };
 
       try {
@@ -90,23 +78,13 @@ const CreateProduct: WithLayout = () => {
           reqCreateItem.images = res.data.urls;
         }
         const _ = await CmsApi.createItem(reqCreateItem);
-        setMessage({
-          isSuccess: true,
-          message: 'Success',
-        });
+        toast.success('Create product success');
       } catch (error: any) {
-        setMessage({ message: error.data.message, isSuccess: false });
+        toast.error(error.data.message);
       }
 
-      setTimeout(() => {
-        setMessage({
-          isSuccess: null,
-          message: '',
-        });
-      }, 3000);
-
       setImage([]);
-      setValueCategory('');
+      setValueCategory([]);
       resetForm({});
       setSubmitting(false);
     },
@@ -116,7 +94,7 @@ const CreateProduct: WithLayout = () => {
       price: Yup.string().required('You must enter your price.'),
       cost: Yup.string().required('You must enter your cost.'),
       quantity: Yup.string().required('You must enter your quantity.'),
-      // sku: Yup.string().required('You must enter your sku.'),
+      stock: Yup.string().required('You must enter your stock.'),
     }),
   });
 
@@ -154,40 +132,47 @@ const CreateProduct: WithLayout = () => {
               value={formik.values.description}
             />
           </div>
-          {/* <label htmlFor='' className='text-sm'>
-            SKU
-          </label>
-          <Input
-            id='sku'
-            name='sku'
-            type='text'
-            placeholder='Enter SKU'
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.sku}
-          />
-          {formik.touched.sku && formik.errors.sku ? (
-            <div className='text-sm text-light-error'>{formik.errors.sku}</div>
-          ) : null} */}
-
-          <div className='w-full'>
-            <label htmlFor='' className='text-sm'>
-              Quantity
-            </label>
-            <Input
-              id='quantity'
-              name='quantity'
-              type='number'
-              placeholder='Enter Quantity'
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.quantity}
-            />
-            {formik.touched.quantity && formik.errors.quantity ? (
-              <div className='text-sm text-light-error'>
-                {formik.errors.quantity}
+          <div className='flex items-center justify-between gap-6'>
+            <div className='w-full'>
+              <label htmlFor='' className='text-sm'>
+                Stock
+              </label>
+              <Input
+                id='stock'
+                name='stock'
+                type='number'
+                placeholder='Enter Stock'
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.stock}
+              />
+              {formik.touched.stock && formik.errors.stock ? (
+                <div className='text-sm text-light-error'>
+                  {formik.errors.stock}
+                </div>
+              ) : null}
+            </div>
+            <div className='w-full'>
+              <div>
+                <label htmlFor='' className='text-sm'>
+                  Quantity
+                </label>
+                <Input
+                  id='quantity'
+                  name='quantity'
+                  type='number'
+                  placeholder='Enter Quantity'
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.quantity}
+                />
+                {formik.touched.quantity && formik.errors.quantity ? (
+                  <div className='text-sm text-light-error'>
+                    {formik.errors.quantity}
+                  </div>
+                ) : null}
               </div>
-            ) : null}
+            </div>
           </div>
 
           <div className='w-full'>
@@ -236,12 +221,9 @@ const CreateProduct: WithLayout = () => {
           <Autocomplete
             disablePortal
             id='combo-box-demo'
-            options={category.map((item) => ({
-              id: item.id,
-              label: item.name,
-            }))}
-            isOptionEqualToValue={(option, value) => option.id === value.id}
+            options={category}
             onChange={handleSelectValueDescription}
+            getOptionLabel={(option) => option.name}
             sx={{ width: '100%' }}
             renderInput={(params) => (
               <TextField
@@ -252,9 +234,9 @@ const CreateProduct: WithLayout = () => {
               />
             )}
           />
-          {formik.touched.categoryId && formik.errors.categoryId ? (
+          {formik.touched.categoriesId && formik.errors.categoriesId ? (
             <div className='text-sm text-light-error'>
-              {formik.errors.categoryId}
+              {formik.errors.categoriesId}
             </div>
           ) : null}
 
@@ -288,18 +270,15 @@ const CreateProduct: WithLayout = () => {
           </div>
         </form>
       </div>
+      <ToastContainer />
 
-      {message.isSuccess === true && <Alert title={message.message} success />}
-      {message.isSuccess === false && <Alert title={message.message} error />}
+      {/* {message.isSuccess === true && <Alert title={message.message} success />}
+      {message.isSuccess === false && <Alert title={message.message} error />} */}
       <span>{error}</span>
     </div>
   );
 };
 
-CreateProduct.getLayout = (page) => (
-  <Layout>
-    <Auth>{page}</Auth>
-  </Layout>
-);
+CreateProduct.getLayout = (page) => <Layout>{page}</Layout>;
 
 export default CreateProduct;

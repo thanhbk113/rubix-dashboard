@@ -1,6 +1,9 @@
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { useEffect, useState } from 'react';
 
+import TablePagination from '@/components/Common/TablePagination';
+import Title from '@/components/Common/Title';
+
 import { CmsApi } from '../../api/cms-api';
 import { ReqSearch } from '../../shared/types/itemType';
 import { User } from '../../shared/types/rolesType';
@@ -79,9 +82,12 @@ const Permission = () => {
               ></Title>
             </th>
           </tr>
-          <div className='flex w-full flex-col items-center justify-between'>
+          <tbody className='flex w-full flex-col items-center justify-between'>
             {users?.map((user, index) => (
-              <tr className='grid h-16 w-full grid-cols-8 border-b hover:bg-light-background-hover'>
+              <tr
+                key={index}
+                className='grid h-16 w-full grid-cols-8 border-b hover:bg-light-background-hover'
+              >
                 <td className='col-span-2 flex items-center justify-between pl-5'>
                   {user.username}
                 </td>
@@ -98,7 +104,7 @@ const Permission = () => {
                 </td>
               </tr>
             ))}
-          </div>
+          </tbody>
         </table>
         <TablePagination />
       </div>

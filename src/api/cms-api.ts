@@ -2,6 +2,7 @@ import { AxiosResponse } from 'axios';
 
 import axiosClient from '@/api/axiosClient';
 import { ReqUploadFiles, ResUploadFiles } from '@/shared/types/uploadType';
+import { ResUser } from '@/shared/types/userType';
 
 import {
   ReqLogin,
@@ -41,6 +42,10 @@ export const CmsApi = {
 
   getRoles: () => {
     return axiosClient.get<ResGetRoles>('/api/auth/roles');
+  },
+
+  getUSer: (id: string) => {
+    return axiosClient.get<ResUser>(`/api/users/${id}`);
   },
 
   getUsers: ({ sort, search, take, order }: ReqSearch) => {

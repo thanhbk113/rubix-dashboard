@@ -4,10 +4,11 @@ export interface ReqItem {
   price: number | string;
   cost: number | string;
   images: string[];
-  categoryId: string;
+  categoriesId: string[];
   quantity: number | string;
   details: string;
-  // sku: string;
+  stock: number | string;
+  active: boolean;
 }
 
 export interface ReqSearch {

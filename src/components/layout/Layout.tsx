@@ -1,8 +1,11 @@
 import { LockOpen } from '@mui/icons-material';
+import CategoryIcon from '@mui/icons-material/Category';
 import GridViewIcon from '@mui/icons-material/GridView';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
 import KeyboardDoubleArrowRightOutlinedIcon from '@mui/icons-material/KeyboardDoubleArrowRightOutlined';
+import LocalMallIcon from '@mui/icons-material/LocalMall';
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 
 import Logo from '@/components/Common/Logo';
 import NavMenu from '@/components/Common/Menu';
@@ -59,6 +62,14 @@ const ListUser = [
     path: '/user',
     exact: true,
     label: 'Users',
+  },
+];
+
+const Order = [
+  {
+    path: '/order',
+    exact: true,
+    label: 'Order',
   },
 ];
 
@@ -123,37 +134,39 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         ) : null}
 
         <NavMenu
-          className=''
-          labelIcon={<GridViewIcon />}
+          labelIcon={<PeopleAltIcon />}
           title='User'
           isEnableArrowIcon={true}
           listRoutes={ListUser}
         />
         <NavMenu
-          className=''
-          labelIcon={<GridViewIcon />}
-          title='Product'
-          isEnableArrowIcon={true}
-          listRoutes={ListProductLabels}
-        />
-        <NavMenu
-          className=''
           labelIcon={<LockOpen />}
           title='Roles & Permissions'
           isEnableArrowIcon={true}
           listRoutes={ListRolesPermisstionLabels}
         />
         <NavMenu
-          className=''
           labelIcon={<GridViewIcon />}
+          title='Product'
+          isEnableArrowIcon={true}
+          listRoutes={ListProductLabels}
+        />
+        <NavMenu
+          labelIcon={<CategoryIcon />}
           title='Categories'
           isEnableArrowIcon={true}
           listRoutes={ListCategoriesLabels}
         />
+        <NavMenu
+          labelIcon={<LocalMallIcon />}
+          title='Order'
+          isEnableArrowIcon={true}
+          listRoutes={Order}
+        />
       </div>
       <div className='flex h-screen flex-1 flex-col overflow-y-auto'>
         <Header />
-        <div className=' bg-white p-10'>{children}</div>
+        <div className='flex-1 bg-white p-10'>{children}</div>
       </div>
     </div>
   );
