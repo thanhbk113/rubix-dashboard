@@ -1,5 +1,5 @@
-import ArrowDownwardOutlinedIcon from '@mui/icons-material/ArrowDownwardOutlined';
 import { useState } from 'react';
+import { MdOutlineArrowDownward } from 'react-icons/md';
 
 const Title = ({
   title,
@@ -30,7 +30,7 @@ const Title = ({
         <span>{title}</span>
         {hiddenSort && (
           <span className='cursor-pointer' onClick={() => handleSort()}>
-            <ArrowDownwardOutlinedIcon style={{ fontSize: '20px' }} />
+            <MdOutlineArrowDownward style={{ fontSize: '20px' }} />
           </span>
         )}
       </span>

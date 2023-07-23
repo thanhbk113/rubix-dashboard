@@ -1,6 +1,5 @@
-import HighlightOffIcon from '@mui/icons-material/HighlightOff';
-import WallpaperIcon from '@mui/icons-material/Wallpaper';
 import { ChangeEvent, FC, useState } from 'react';
+import { MdOutlineHighlightOff, MdOutlineWallpaper } from 'react-icons/md';
 
 import NextImage from '@/components/NextImage';
 
@@ -43,10 +42,10 @@ const ImageItem: FC<ImageItemProps> = (props) => {
         className='h-full w-full'
       />
       <span
-        className='absolute top-0 right-0 z-20 cursor-pointer'
+        className='absolute top-0 right-0 z-20 cursor-pointer text-2xl'
         onClick={handleDeleteImage}
       >
-        <HighlightOffIcon />
+        <MdOutlineHighlightOff />
       </span>
       {ishover && (
         <div className='absolute top-1/2 left-1/2 z-10 flex h-full w-full -translate-x-1/2 -translate-y-1/2 items-center justify-center bg-black opacity-20'>
@@ -59,7 +58,7 @@ const ImageItem: FC<ImageItemProps> = (props) => {
               }
             }}
           />
-          <WallpaperIcon className=' absolute top-1/2 left-1/2 h-12 w-12 -translate-x-1/2 -translate-y-1/2 cursor-pointer text-white' />
+          <MdOutlineWallpaper className=' absolute top-1/2 left-1/2 h-12 w-12 -translate-x-1/2 -translate-y-1/2 cursor-pointer text-white' />
         </div>
       )}
     </div>
@@ -86,10 +85,9 @@ const UploadImage: React.FC<UploadImageProps> = (props) => {
             title='Upload Image(s)'
             type='file'
             onChange={handleFileUpload}
-            className=''
             multiple={props.multiple}
           />
-          <WallpaperIcon />
+          <MdOutlineWallpaper style={{ fontSize: '24px' }} />
           <h2 className='text-sm text-light-text-primary'>
             PNJ, JPG & GIF ACCEPTED
           </h2>

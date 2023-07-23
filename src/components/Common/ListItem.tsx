@@ -1,6 +1,6 @@
-import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import Link from 'next/link';
 import { FC, useEffect, useState } from 'react';
+import { MdFiberManualRecord } from 'react-icons/md';
 
 import { IRoutes as IRoute } from './Menu';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
@@ -36,8 +36,8 @@ const Menu: FC<IListRoutes> = ({ route }) => {
       }
       onClick={() => dispatch(alo1234(route.label))}
     >
-      <span>
-        <FiberManualRecordIcon style={{ fontSize: '12px' }} />
+      <span className='text-2xl'>
+        <MdFiberManualRecord style={{ fontSize: '12px' }} />
       </span>
       <span>{route.label}</span>
     </Link>

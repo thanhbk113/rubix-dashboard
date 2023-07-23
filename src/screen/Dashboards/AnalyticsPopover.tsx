@@ -1,6 +1,6 @@
-import { KeyboardArrowDown } from '@mui/icons-material';
 import { Button, MenuItem, Popover } from '@mui/material';
 import { FC, useRef, useState } from 'react';
+import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 
 import { H6, Small } from '@/components/Common/Typography';
 
@@ -28,7 +28,11 @@ const AnalyticsPopover: FC = () => {
         disableRipple
         onClick={() => setOpen(true)}
         ref={anchorRef}
-        endIcon={<KeyboardArrowDown sx={{ color: 'text.disabled' }} />}
+        endIcon={
+          <MdOutlineKeyboardArrowDown
+            style={{ color: 'text.disabled', fontSize: '24px' }}
+          />
+        }
         sx={{ p: 0, '&:hover': { backgroundColor: 'transparent' } }}
       >
         <H6 color='text.disabled'>{selected}</H6>

@@ -1,7 +1,6 @@
-import { IosShare } from '@mui/icons-material';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { Checkbox } from '@mui/material';
 import React, { useEffect } from 'react';
+import { MdOutlineIosShare, MdOutlineMoreVert } from 'react-icons/md';
 
 import TablePagination from '@/components/Common/TablePagination';
 import Title from '@/components/Common/Title';
@@ -74,7 +73,7 @@ const Roles: WithLayout = () => {
           <div className='mx-5 flex h-full flex-row items-center justify-between'>
             <button className='h-10 w-36 rounded-lg border border-light-borderColor font-medium text-light-text-secondary'>
               <div className='flex flex-row items-center justify-center space-x-2'>
-                <IosShare style={{ fontSize: '20px' }} />
+                <MdOutlineIosShare style={{ fontSize: '24px' }} />
                 <span className=''>EXPORT</span>
               </div>
             </button>
@@ -201,8 +200,8 @@ const Roles: WithLayout = () => {
                   {user.status}
                 </td>
                 <td className='col-span-1 flex items-center justify-between pl-10'>
-                  <span className='cursor-pointer'>
-                    <MoreVertIcon />
+                  <span className='cursor-pointer text-2xl'>
+                    <MdOutlineMoreVert />
                   </span>
                 </td>
               </tr>

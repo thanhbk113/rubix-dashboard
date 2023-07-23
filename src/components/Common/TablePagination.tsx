@@ -1,7 +1,9 @@
-import KeyboardArrowLeftOutlinedIcon from '@mui/icons-material/KeyboardArrowLeftOutlined';
-import KeyboardArrowRightOutlinedIcon from '@mui/icons-material/KeyboardArrowRightOutlined';
 import { FormControl } from '@mui/material';
 import { FC, useEffect, useState } from 'react';
+import {
+  MdOutlineKeyboardArrowLeft,
+  MdOutlineKeyboardArrowRight,
+} from 'react-icons/md';
 
 interface ITablePagination {
   pagination: number;
@@ -85,12 +87,15 @@ const TablePagination: FC<ITablePagination> = ({ pagination, handleSort }) => {
           className={
             valueLeftPage > 1
               ? 'cursor-pointer rounded-full hover:bg-gray-200'
-              : 'cursor-not-allowed' + ' '
+              : 'cursor-not-allowed'
           }
         >
-          <KeyboardArrowLeftOutlinedIcon
+          <MdOutlineKeyboardArrowLeft
             onClick={handlePrevPage}
-            style={{ opacity: valueLeftPage > 1 ? '1' : '0.3' }}
+            style={{
+              opacity: valueLeftPage > 1 ? '1' : '0.3',
+              fontSize: '1.5rem',
+            }}
           />
         </span>
         <span
@@ -100,9 +105,12 @@ const TablePagination: FC<ITablePagination> = ({ pagination, handleSort }) => {
               : 'cursor-not-allowed'
           }
         >
-          <KeyboardArrowRightOutlinedIcon
+          <MdOutlineKeyboardArrowRight
             onClick={handleNextPage}
-            style={{ opacity: valueRightPage < pagination ? '1' : '0.3' }}
+            style={{
+              opacity: valueRightPage < pagination ? '1' : '0.3',
+              fontSize: '1.5rem',
+            }}
           />
         </span>
       </div>

@@ -1,6 +1,6 @@
-import SearchIcon from '@mui/icons-material/Search';
 import { InputBase, InputBaseProps, styled } from '@mui/material';
 import { FC } from 'react';
+import { MdOutlineSearch } from 'react-icons/md';
 // styled component
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
@@ -27,9 +27,9 @@ const SearchInput: FC<InputBaseProps> = (props) => {
     <StyledInputBase
       {...props}
       startAdornment={
-        <SearchIcon
-          sx={{
-            fontSize: 16,
+        <MdOutlineSearch
+          style={{
+            fontSize: '24px',
             marginRight: 1,
             color: 'text.disabled',
           }}

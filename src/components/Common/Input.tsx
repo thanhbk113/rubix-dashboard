@@ -1,9 +1,11 @@
-import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
-import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
-import { FC, useState } from "react";
+import { FC, useState } from 'react';
+import { MdOutlineVisibility, MdOutlineVisibilityOff } from 'react-icons/md';
 
 interface IInput
-  extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
+  extends React.DetailedHTMLProps<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    HTMLInputElement
+  > {
   eyeEnable?: boolean;
 }
 
@@ -17,28 +19,32 @@ const Input: FC<IInput> = (props) => {
     if (type) {
       return type;
     } else {
-      return !isHidden ? "password" : props.type;
+      return !isHidden ? 'password' : props.type;
     }
   };
 
   return (
-    <div className="w-full h-[56px] rounded-lg  mb-4 flex items-center justify-between relative border-gray-300 border-solid border">
+    <div className='relative mb-4 flex  h-[56px] w-full items-center justify-between rounded-lg border border-solid border-gray-300'>
       <input
         {...parentAttributes}
-        className=" w-full h-full px-3 outline-none rounded-lg"
+        className=' h-full w-full rounded-lg px-3 outline-none'
         type={getType()}
       />
       {eyeEnable ? (
         !isHidden ? (
-          <VisibilityOutlinedIcon
-            className="text-gray-400 absolute right-2 "
-            onClick={HiddenPassword}
-          />
+          <span className='text-2xl'>
+            <MdOutlineVisibility
+              className='absolute right-2 text-gray-400 '
+              onClick={HiddenPassword}
+            />
+          </span>
         ) : (
-          <VisibilityOffOutlinedIcon
-            className="text-gray-400 absolute right-2"
-            onClick={HiddenPassword}
-          />
+          <span className='text-2xl'>
+            <MdOutlineVisibilityOff
+              className='absolute right-2 text-gray-400'
+              onClick={HiddenPassword}
+            />
+          </span>
         )
       ) : null}
     </div>

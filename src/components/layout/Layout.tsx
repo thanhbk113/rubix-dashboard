@@ -1,11 +1,13 @@
-import { LockOpen } from '@mui/icons-material';
-import CategoryIcon from '@mui/icons-material/Category';
-import GridViewIcon from '@mui/icons-material/GridView';
-import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
-import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
-import KeyboardDoubleArrowRightOutlinedIcon from '@mui/icons-material/KeyboardDoubleArrowRightOutlined';
-import LocalMallIcon from '@mui/icons-material/LocalMall';
-import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
+import {
+  MdOutlineCategory,
+  MdOutlineGridView,
+  MdOutlineHome,
+  MdOutlineKeyboardDoubleArrowLeft,
+  MdOutlineKeyboardDoubleArrowRight,
+  MdOutlineLocalMall,
+  MdOutlineLockOpen,
+  MdPeopleAlt,
+} from 'react-icons/md';
 
 import Logo from '@/components/Common/Logo';
 import NavMenu from '@/components/Common/Menu';
@@ -108,9 +110,13 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
               onClick={() => dispatch(handleSlide())}
             >
               {isSlide ? (
-                <KeyboardDoubleArrowLeftIcon />
+                <MdOutlineKeyboardDoubleArrowLeft
+                  style={{ fontSize: '24px' }}
+                />
               ) : (
-                <KeyboardDoubleArrowRightOutlinedIcon />
+                <MdOutlineKeyboardDoubleArrowRight
+                  style={{ fontSize: '24px' }}
+                />
               )}
             </span>
           ) : null}
@@ -118,7 +124,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 
         <NavMenu
           className='bg-light-background-hover'
-          labelIcon={<HomeOutlinedIcon />}
+          labelIcon={<MdOutlineHome />}
           title='Dashboard'
           isEnableArrowIcon={true}
           listRoutes={ListLabels}
@@ -134,31 +140,31 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         ) : null}
 
         <NavMenu
-          labelIcon={<PeopleAltIcon />}
+          labelIcon={<MdPeopleAlt />}
           title='User'
           isEnableArrowIcon={true}
           listRoutes={ListUser}
         />
         <NavMenu
-          labelIcon={<LockOpen />}
+          labelIcon={<MdOutlineLockOpen />}
           title='Roles & Permissions'
           isEnableArrowIcon={true}
           listRoutes={ListRolesPermisstionLabels}
         />
         <NavMenu
-          labelIcon={<GridViewIcon />}
+          labelIcon={<MdOutlineGridView />}
           title='Product'
           isEnableArrowIcon={true}
           listRoutes={ListProductLabels}
         />
         <NavMenu
-          labelIcon={<CategoryIcon />}
+          labelIcon={<MdOutlineCategory />}
           title='Categories'
           isEnableArrowIcon={true}
           listRoutes={ListCategoriesLabels}
         />
         <NavMenu
-          labelIcon={<LocalMallIcon />}
+          labelIcon={<MdOutlineLocalMall />}
           title='Order'
           isEnableArrowIcon={true}
           listRoutes={Order}

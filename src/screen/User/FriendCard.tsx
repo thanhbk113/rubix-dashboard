@@ -1,8 +1,8 @@
-import { Instagram, SportsBasketball, Twitter } from '@mui/icons-material';
-import FacebookIcon from '@mui/icons-material/Facebook';
 import { Card, IconButton } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { FC } from 'react';
+import { AiOutlineInstagram, AiOutlineTwitter } from 'react-icons/ai';
+import { MdOutlineFacebook, MdOutlineSportsBasketball } from 'react-icons/md';
 
 import { H6, Small } from '@/components/Common/Typography';
 import NextImage from '@/components/NextImage';
@@ -43,17 +43,17 @@ const FriendCard: FC<FriendCardProps> = () => {
       <H6 mt={2}>Selena Gomez</H6>
       <Small color='text.disabled'>Marketing Manager</Small>
       <Box marginTop={2}>
-        <IconButton>
-          <FacebookIcon fontSize='small' />
+        <IconButton className='text-2xl'>
+          <MdOutlineFacebook />
         </IconButton>
-        <IconButton>
-          <Twitter color='primary' />
+        <IconButton className='text-2xl'>
+          <AiOutlineTwitter color='primary' />
         </IconButton>
-        <IconButton>
-          <Instagram color='warning' />
+        <IconButton className='text-2xl'>
+          <AiOutlineInstagram color='warning' />
         </IconButton>
-        <IconButton>
-          <SportsBasketball color='error' />
+        <IconButton className='text-2xl'>
+          <MdOutlineSportsBasketball color='error' />
         </IconButton>
       </Box>
     </Card>

@@ -1,4 +1,3 @@
-import { MoreVert, Send } from '@mui/icons-material';
 import {
   Avatar,
   Box,
@@ -9,6 +8,7 @@ import {
   useTheme,
 } from '@mui/material';
 import React, { FC, MouseEvent } from 'react';
+import { MdOutlineMoreVert, MdSend } from 'react-icons/md';
 
 import FlexBox from '@/components/Common/FlexBox';
 import { H5, Small, Tiny } from '@/components/Common/Typography';
@@ -60,8 +60,8 @@ const PostCard: FC<PostCardProps> = ({ post, handleMore }) => {
           </Box>
         </FlexBox>
 
-        <IconButton onClick={handleMore}>
-          <MoreVert fontSize='small' color='disabled' />
+        <IconButton onClick={handleMore} className='text-2xl'>
+          <MdOutlineMoreVert fontSize='small' color='disabled' />
         </IconButton>
       </FlexBox>
 
@@ -110,7 +110,7 @@ const PostCard: FC<PostCardProps> = ({ post, handleMore }) => {
           />
 
           <IconButton>
-            <Send fontSize='large' color='disabled' />
+            <MdSend fontSize='large' color='disabled' />
           </IconButton>
         </FlexBox>
       </Box>

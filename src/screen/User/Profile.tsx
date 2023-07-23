@@ -1,6 +1,6 @@
-import { BusinessCenter, Mail, Place } from '@mui/icons-material';
 import { Box, Card, Divider, Grid, styled } from '@mui/material';
 import { FC, MouseEvent, useState } from 'react';
+import { MdBusinessCenter, MdMail, MdPlace } from 'react-icons/md';
 
 import FlexBox from '@/components/Common/FlexBox';
 import MoreOptions from '@/components/Common/MoreOptions';
@@ -85,7 +85,9 @@ const Profile: FC = () => {
             <Box mt={3}>
               {details.map(({ Icon, smallText, boldText }, index) => (
                 <FlexBox alignItems='center' mt={1.5} key={index}>
-                  <Icon />
+                  <span className='text-2xl'>
+                    <Icon />
+                  </span>
                   <H6 marginLeft={1}>
                     <Small>{smallText}</Small> {boldText}
                   </H6>
@@ -109,22 +111,22 @@ const Profile: FC = () => {
 
 const details = [
   {
-    Icon: Place,
+    Icon: MdPlace,
     boldText: 'Kuwait',
     smallText: 'Lives at',
   },
   {
-    Icon: Mail,
+    Icon: MdMail,
     boldText: '',
     smallText: 'Lenore_Rosenbaum@gmail.com',
   },
   {
-    Icon: BusinessCenter,
+    Icon: MdBusinessCenter,
     boldText: 'UI_LIB',
     smallText: 'Manager at',
   },
   {
-    Icon: BusinessCenter,
+    Icon: MdBusinessCenter,
     smallText: 'Studied at',
     boldText: 'Corwin - Blick',
   },

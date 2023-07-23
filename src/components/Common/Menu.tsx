@@ -1,6 +1,8 @@
-import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
-import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import { FC, useState } from 'react';
+import {
+  MdOutlineKeyboardArrowDown,
+  MdOutlineKeyboardArrowRight,
+} from 'react-icons/md';
 
 import Menu from './ListItem';
 import { useAppSelector } from '../../app/hooks';
@@ -46,19 +48,23 @@ const NavMenu: FC<INavMenu> = (props) => {
       {isShow ? (
         <div className={attrs.className + a} onClick={handleHidden}>
           <div className='flex items-center gap-2 whitespace-nowrap'>
-            <span>{labelIcon}</span>
+            <span className='text-2xl'>{labelIcon}</span>
             <span>{title}</span>
           </div>
           {isEnableArrowIcon ? (
             !isHidden ? (
-              <KeyboardArrowRightIcon className='text-light-text-primary' />
+              <span className='text-2xl'>
+                <MdOutlineKeyboardArrowRight className='text-light-text-primary' />
+              </span>
             ) : (
-              <KeyboardArrowDownOutlinedIcon className='text-light-text-primary' />
+              <span className='text-2xl'>
+                <MdOutlineKeyboardArrowDown className='text-light-text-primary' />
+              </span>
             )
           ) : null}
         </div>
       ) : (
-        <div className='flex items-center justify-center whitespace-nowrap'>
+        <div className='flex items-center justify-center whitespace-nowrap text-2xl'>
           <span className='p-2'>{labelIcon}</span>
         </div>
       )}

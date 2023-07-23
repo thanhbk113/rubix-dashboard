@@ -1,7 +1,9 @@
-import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
-import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 import Link from 'next/link';
 import { FC, useEffect, useState } from 'react';
+import {
+  MdOutlineKeyboardArrowLeft,
+  MdOutlineKeyboardArrowRight,
+} from 'react-icons/md';
 
 import Button from '@/components/Common/Button';
 import Layout from '@/components/layout/Layout';
@@ -26,7 +28,7 @@ const ButtonPage: FC<IButtonPage> = (props) => {
   return (
     <button
       {...parentAttributes}
-      className={`${className} flex h-10 w-10 cursor-pointer items-center justify-center border text-gray-500 transition-all hover:border-amber-400 hover:bg-amber-400 hover:text-white`}
+      className={`${className} flex h-10 w-10 cursor-pointer items-center justify-center border text-2xl text-gray-500 transition-all hover:border-amber-400 hover:bg-amber-400 hover:text-white`}
     >
       {children}
       {title}
@@ -164,7 +166,7 @@ const ListProduct: WithLayout = () => {
       <div className='flex items-center justify-between pt-16 text-gray-200'>
         <div className='flex gap-2'>
           <ButtonPage onClick={handlePrevPage}>
-            <KeyboardDoubleArrowLeftIcon />
+            <MdOutlineKeyboardArrowLeft />
           </ButtonPage>
           {Array(pageCount > 2 ? COUNT_PAGES_SHOW : pageCount)
             .fill(null)
@@ -183,7 +185,7 @@ const ListProduct: WithLayout = () => {
               />
             ))}
           <ButtonPage onClick={handleNextPage}>
-            <KeyboardDoubleArrowRightIcon />
+            <MdOutlineKeyboardArrowRight />
           </ButtonPage>
         </div>
         <span className='text-gray-500'>
