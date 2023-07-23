@@ -1,5 +1,5 @@
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { useEffect, useState } from 'react';
+import { MdOutlineMoreVert } from 'react-icons/md';
 
 import TablePagination from '@/components/Common/TablePagination';
 import Title from '@/components/Common/Title';
@@ -99,14 +99,14 @@ const Permission = () => {
                 </td>
                 <td className='col-span-1 flex items-center justify-between pl-10'>
                   <span className='cursor-pointer'>
-                    <MoreVertIcon />
+                    <MdOutlineMoreVert />
                   </span>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
-        <TablePagination />
+        <TablePagination pagination={1} />
       </div>
     </div>
   );
