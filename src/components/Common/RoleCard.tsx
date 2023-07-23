@@ -1,5 +1,7 @@
 import { FC } from 'react';
 
+import NextImage from '@/components/NextImage';
+
 interface Props {
   title: string;
   total: number;
@@ -18,16 +20,19 @@ export const RoleCard: FC<Props> = (props) => {
       <div className='flex flex-col px-4 pt-6'>
         <div className='mb-8 flex flex-row items-center justify-between text-sm text-light-text-secondary'>
           <span>Total {props.total} users</span>
-          {/* {props.image_urls.map((item, index) => {
+          {props.image_urls.map((item, index) => {
             const a = 20;
             return (
-              <img
+              <NextImage
+                height={100}
+                width={320}
+                key={index}
                 src={item}
                 alt=''
                 className={`${list[index]} absolute h-12 w-12 max-w-none rounded-full border-4  border-white`}
               />
             );
-          })} */}
+          })}
         </div>
         <span className='text-xl font-medium text-light-text-secondary'>
           {props.title}
