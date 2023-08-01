@@ -1,6 +1,6 @@
 export const ERROR_TOKEN = 'RefreshAccessTokenError';
 
-export const BASE_URL_API = 'https://hieuhoine.onrender.com';
+export const BASE_URL_API = 'https://tmdt-api-7i6b.onrender.com';
 
 export const ROUTES = {
   LOGIN: '/login',
