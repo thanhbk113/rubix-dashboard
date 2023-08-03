@@ -1,5 +1,4 @@
 import {
-  Box,
   Card,
   styled,
   Table,
@@ -8,10 +7,13 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material';
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import ScrollBar from 'simplebar-react';
 
 import { H5, Small } from '@/components/Common/Typography';
+
+import { CmsApi } from '@/api/cms-api';
+import { UserMostSpent } from '@/shared/types/dashboardType';
 
 const commonCSS = {
   minWidth: 120,
@@ -40,9 +42,28 @@ const BodyTableCell = styled(TableCell)(({ theme }) => ({
 }));
 
 const RecentOrders: FC = () => {
+  const [userMostSpent, setUserMostSpent] = useState<UserMostSpent[]>([]);
+  const [loading, setLoading] = useState(false);
+
+  const getCount = async () => {
+    try {
+      setLoading(true);
+      const res = await CmsApi.getCount();
+      setUserMostSpent(res.data.data.fiveMostSpentUsers);
+      setLoading(false);
+    } catch (e) {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getCount();
+  }, []);
+
   return (
     <Card sx={{ padding: '2rem' }}>
-      <H5>Recent Orders</H5>
+      <H5 className='pb-2'>Người dùng hàng đầu</H5>
+      <hr />
 
       <ScrollBar>
         <Table>
@@ -50,26 +71,23 @@ const RecentOrders: FC = () => {
             sx={{ borderBottom: '1.5px solid', borderColor: 'divider' }}
           >
             <TableRow>
-              <HeadTableCell>Tracking No</HeadTableCell>
-              <HeadTableCell>Product Name</HeadTableCell>
-              <HeadTableCell>Price</HeadTableCell>
-              <HeadTableCell>Total Order</HeadTableCell>
-              <HeadTableCell>Total amount</HeadTableCell>
+              <HeadTableCell>Top</HeadTableCell>
+              <HeadTableCell>Tên Người Dùng</HeadTableCell>
+              <HeadTableCell>Số điện thoại</HeadTableCell>
+              <HeadTableCell>Email</HeadTableCell>
+              {/* <HeadTableCell>Total amount</HeadTableCell> */}
             </TableRow>
           </TableHead>
 
           <TableBody>
-            {orderList.map((item, index) => (
+            {userMostSpent.map((item, index) => (
               <TableRow key={index}>
-                <BodyTableCell>{item.orderNo}</BodyTableCell>
+                <BodyTableCell>{index + 1}</BodyTableCell>
                 <BodyTableCell>
-                  <Box display='flex' alignItems='center'>
-                    <img src={item.image} alt='product title' width='40px' />
-                    <Small ml='1rem'>{item.name}</Small>
-                  </Box>
+                  <Small ml='1rem'>{item.username}</Small>
                 </BodyTableCell>
-                <BodyTableCell>${item.price}</BodyTableCell>
-                <BodyTableCell>
+                <BodyTableCell>{item.phone}</BodyTableCell>
+                {/* <BodyTableCell>
                   <Box
                     sx={{
                       backgroundColor: 'secondary.200',
@@ -82,8 +100,8 @@ const RecentOrders: FC = () => {
                   >
                     {item.totalOrder}
                   </Box>
-                </BodyTableCell>
-                <BodyTableCell>{item.totalAmount}</BodyTableCell>
+                </BodyTableCell> */}
+                <BodyTableCell>{item.email}</BodyTableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -92,40 +110,5 @@ const RecentOrders: FC = () => {
     </Card>
   );
 };
-
-const orderList = [
-  {
-    orderNo: '#JY7685',
-    name: 'Nike Air max 170',
-    image: '/static/products/shoe-1.png',
-    price: 654,
-    totalOrder: 325,
-    totalAmount: '$1,45,660',
-  },
-  {
-    orderNo: '#JY7686',
-    name: 'Cactus Plant',
-    image: '/static/products/bonsai.png',
-    price: 654,
-    totalOrder: 40,
-    totalAmount: '$1,45,420',
-  },
-  {
-    orderNo: '#JY7687',
-    name: 'Minimal Pot',
-    image: '/static/products/airbud.png',
-    price: 654,
-    totalOrder: 57,
-    totalAmount: '$45,660',
-  },
-  {
-    orderNo: '#JY7688',
-    name: 'Adidas Blaze',
-    image: '/static/products/shoe-2.png',
-    price: 654,
-    totalOrder: 125,
-    totalAmount: '$12,660',
-  },
-];
 
 export default RecentOrders;

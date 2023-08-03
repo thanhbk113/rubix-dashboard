@@ -1,6 +1,8 @@
 import { AxiosResponse } from 'axios';
 
 import axiosClient from '@/api/axiosClient';
+import { ResCountDashboard } from '@/shared/types/dashboardType';
+import { ResOrder } from '@/shared/types/orderType';
 import { ReqUploadFiles, ResUploadFiles } from '@/shared/types/uploadType';
 import { ResUser } from '@/shared/types/userType';
 
@@ -75,6 +77,20 @@ export const CmsApi = {
   getListItems: ({ sort, page, take }: ReqSearch) => {
     return axiosClient.get<ResItem>('/api/item/search', {
       params: { sort, page, take },
+    });
+  },
+
+  getCount: () => {
+    return axiosClient.get<ResCountDashboard>('/api/order/count');
+  },
+
+  getListOrders: () => {
+    return axiosClient.get<ResOrder>('/api/order/list');
+  },
+
+  completeOrder: (id: string) => {
+    return axiosClient.post<ResOrder>(`/api/order/order-complete`, {
+      order_id: id,
     });
   },
 

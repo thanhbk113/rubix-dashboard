@@ -6,7 +6,7 @@ import { H3, H5 } from '@/components/Common/Typography';
 // root component interface
 interface SaaSCardProps {
   card: {
-    price: number;
+    price: number | undefined;
     Icon: any;
     title: string;
     color: string;
@@ -50,7 +50,7 @@ const SaaSCard: FC<SaaSCardProps> = ({ card }) => {
       </Box>
       <Box mt={{ xs: '1rem', sm: 0 }}>
         <H5 color='text.disabled'>{title}</H5>
-        <H3>${price}</H3>
+        {title === 'Tổng doanh thu' ? <H3>{price}.000 đ</H3> : <H3>{price}</H3>}
       </Box>
     </StyledCard>
   );

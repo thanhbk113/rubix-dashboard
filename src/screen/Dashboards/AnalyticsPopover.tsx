@@ -6,10 +6,10 @@ import { H6, Small } from '@/components/Common/Typography';
 
 // dummy options
 const selectOptions = [
-  'All Weeks',
-  '2 Weeks Ago',
-  '3 Weeks Ago',
-  '1 Month Ago',
+  'Hôm Nay',
+  '2 Tuần Trước',
+  '3 Tuần Trước',
+  '1 Tháng Trước',
 ];
 
 const AnalyticsPopover: FC = () => {

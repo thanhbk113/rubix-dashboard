@@ -6,7 +6,6 @@ import {
   MdOutlineKeyboardDoubleArrowRight,
   MdOutlineLocalMall,
   MdOutlineLockOpen,
-  MdPeopleAlt,
 } from 'react-icons/md';
 
 import Logo from '@/components/Common/Logo';
@@ -139,12 +138,12 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           </div>
         ) : null}
 
-        <NavMenu
+        {/* <NavMenu
           labelIcon={<MdPeopleAlt />}
           title='User'
           isEnableArrowIcon={true}
           listRoutes={ListUser}
-        />
+        /> */}
         <NavMenu
           labelIcon={<MdOutlineLockOpen />}
           title='Roles & Permissions'

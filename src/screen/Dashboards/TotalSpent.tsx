@@ -1,35 +1,60 @@
 import { Box, Card, useTheme } from '@mui/material';
 import { ApexOptions } from 'apexcharts';
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import Chart from 'react-apexcharts';
 
 import { H2, H5 } from '@/components/Common/Typography';
 
-const data = {
-  series: [
-    {
-      name: 'Spent',
-      data: [22, 80, 36, 50, 60, 30, 90, 26, 75, 10, 55, 65],
-    },
-  ],
-  categories: [
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
-    'May',
-    'Jun',
-    'Jul',
-    'Aug',
-    'Sep',
-    'Oct',
-    'Nov',
-    'Dec',
-  ],
-};
+import { CmsApi } from '@/api/cms-api';
+import { Count } from '@/shared/types/dashboardType';
 
 const TotalSpent: FC = () => {
   const theme = useTheme();
+
+  const [totalSpentMonth, setTotalSpentMonth] = useState<number[]>([]);
+  const [totalSpent, setTotalSpent] = useState<Count | undefined>();
+  // const [loading, setLoading] = useState(false);
+
+  const getCount = async () => {
+    try {
+      // setLoading(true);
+      const res = await CmsApi.getCount();
+      setTotalSpent(res.data.data.count);
+      const data = res.data.data.total_spent;
+      setTotalSpentMonth(Object.values(data));
+      // setLoading(false);
+    } catch (e) {
+      console.log(e);
+      // setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getCount();
+  }, []);
+
+  const data = {
+    series: [
+      {
+        name: 'Spent',
+        data: totalSpentMonth,
+      },
+    ],
+    categories: [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
+    ],
+  };
 
   const chartOptions: ApexOptions = {
     chart: {
@@ -123,8 +148,8 @@ const TotalSpent: FC = () => {
         [theme.breakpoints.down(425)]: { padding: '1.5rem' },
       }}
     >
-      <H5>Total Spent</H5>
-      <H2 color='primary.main'>$682.5</H2>
+      <H5>Tổng doanh thu</H5>
+      <H2 color='primary.main'>{totalSpent?.total_price}.000 đ</H2>
 
       <Box
         sx={{
