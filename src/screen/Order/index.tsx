@@ -67,7 +67,7 @@ const Order: WithLayout = () => {
                     )}
                   </div>
                   <span className='font-bold'>
-                    Tổng giá tiền: {product.total_price}.000 đ
+                    Tổng giá tiền: {product.total_price} đ
                   </span>
                   <p>Tổng số lượng: {product.total_quantity}</p>
                 </div>
@@ -88,7 +88,7 @@ const Order: WithLayout = () => {
                     <div className='flex w-full flex-col'>
                       <H4>{item.item.name}</H4>
                       <div className='flex w-full justify-between'>
-                        <H4>Giá: {item.item.price}.000 đ</H4>
+                        <H4>Giá: {item.item.price} đ</H4>
                         <H4>Số lượng: {item.quantity}</H4>
                       </div>
                     </div>

@@ -149,7 +149,7 @@ const TotalSpent: FC = () => {
       }}
     >
       <H5>Tổng doanh thu</H5>
-      <H2 color='primary.main'>{totalSpent?.total_price}.000 đ</H2>
+      <H2 color='primary.main'>{totalSpent?.total_price} đ</H2>
 
       <Box
         sx={{

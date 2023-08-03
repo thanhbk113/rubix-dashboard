@@ -50,7 +50,7 @@ const SaaSCard: FC<SaaSCardProps> = ({ card }) => {
       </Box>
       <Box mt={{ xs: '1rem', sm: 0 }}>
         <H5 color='text.disabled'>{title}</H5>
-        {title === 'Tổng doanh thu' ? <H3>{price}.000 đ</H3> : <H3>{price}</H3>}
+        {title === 'Tổng doanh thu' ? <H3>{price} đ</H3> : <H3>{price}</H3>}
       </Box>
     </StyledCard>
   );
