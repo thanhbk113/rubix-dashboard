@@ -1,14 +1,11 @@
 import { useFormik } from 'formik';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import * as Yup from 'yup';
 
 import Button from '@/components/Common/Button';
-import Checkbox from '@/components/Common/Checkbox';
 import Input from '@/components/Common/Input';
 import Logo from '@/components/Common/Logo';
-import Social from '@/components/Common/Social';
 import NextImage from '@/components/NextImage';
 
 import { CmsApi } from '@/api/cms-api';
@@ -124,12 +121,12 @@ const Register = () => {
               </div>
             ) : null}
 
-            <div className='flex w-full items-center justify-between pt-2 pb-4'>
+            {/* <div className='flex w-full items-center justify-between pt-2 pb-4'>
               <Checkbox content='I agree to privacy policy & terms' />
               <span>
                 <Link href='/' className='text-xs text-a'></Link>
               </span>
-            </div>
+            </div> */}
 
             {/* {!isLoading ? (
               <Button
@@ -158,18 +155,18 @@ const Register = () => {
           {error && (
             <span className='pt-2 text-sm text-light-error'>{error}</span>
           )}
-          <div className='relative mb-8 w-full border-b border-solid border-gray-300 py-4'>
+          {/* <div className='relative mb-8 w-full border-b border-solid border-gray-300 py-4'>
             <p className='absolute left-1/2  top-1/2 my-4 flex w-16 -translate-x-1/2 -translate-y-1/2 justify-center bg-white text-gray-400'>
               or
             </p>
-          </div>
-          <div className='mb-4 flex w-full items-center justify-center gap-4 text-xs'>
+          </div> */}
+          {/* <div className='mb-4 flex w-full items-center justify-center gap-4 text-xs'>
             <p>Already have an account?</p>
             <Link href='/login' className='text-light-primary-main'>
               Sign in instead
             </Link>
-          </div>
-          <Social>
+          </div> */}
+          {/* <Social>
             <Link href='https://www.facebook.com/lownsni'>
               <NextImage height={20} width={20} src='/svg/fb.svg' alt='' />
             </Link>
@@ -182,7 +179,7 @@ const Register = () => {
             <Link href=''>
               <NextImage height={20} width={20} src='/svg/google.svg' alt='' />
             </Link>
-          </Social>
+          </Social> */}
         </div>
       </div>
     </div>
