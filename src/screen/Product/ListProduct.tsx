@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { FC, useEffect, useState } from 'react';
 import {
   MdOutlineKeyboardArrowLeft,
@@ -124,12 +123,12 @@ const ListProduct: WithLayout = () => {
                   <p>{product.description}</p>
                 </div>
                 <div className='flex justify-end gap-4'>
-                  <Link
+                  {/* <Link
                     href='/product/update-product'
                     className='rounded-md border border-amber-400 p-2 transition-all hover:bg-amber-400 hover:text-white'
                   >
                     Update
-                  </Link>
+                  </Link> */}
                   <Button
                     title='Remove'
                     onClick={() => handleDeleteProduct(product.id)}

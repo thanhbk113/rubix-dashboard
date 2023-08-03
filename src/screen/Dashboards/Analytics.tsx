@@ -1,25 +1,51 @@
 import { Box, Card, useTheme } from '@mui/material';
 import { ApexOptions } from 'apexcharts';
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import Chart from 'react-apexcharts';
 
 import FlexBox from '@/components/Common/FlexBox';
 import { H5 } from '@/components/Common/Typography';
 
-import AnalyticsPopover from './AnalyticsPopover';
+import { CmsApi } from '@/api/cms-api';
+import { Count } from '@/shared/types/dashboardType';
 
-const data = {
-  series: [75, 50, 25],
-  categories: ['Sales', 'Orders', 'Return'],
-};
+import AnalyticsPopover from './AnalyticsPopover';
 
 const Analytics: FC = () => {
   const theme = useTheme();
 
+  const [analytics, setAnalytics] = useState<Count>();
+  // const [loading, setLoading] = useState(false);
+
+  const getCount = async () => {
+    try {
+      // setLoading(true);
+      const res = await CmsApi.getCount();
+      setAnalytics(res.data.data.count);
+      // setLoading(false);
+    } catch (e) {
+      console.log(e);
+      // setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getCount();
+  }, []);
+
+  const data = {
+    series: [
+      analytics ? analytics.item_count : 0,
+      analytics ? analytics.order_count : 0,
+      analytics ? analytics.total_price : 0,
+    ],
+    categories: ['Người dùng', 'Đơn hàng', 'Doanh thu'],
+  };
+
   const chartOptions: ApexOptions = {
     chart: { background: 'transparent' },
     colors: [theme.palette.primary.main, '#FF9777', '#FF6B93'],
-    labels: ['Sales', 'Orders', 'Return'],
+    labels: ['Người dùng', 'Đơn hàng', 'Doanh thu'],
     plotOptions: {
       radialBar: {
         dataLabels: {
@@ -76,7 +102,7 @@ const Analytics: FC = () => {
       }}
     >
       <FlexBox alignItems='center' justifyContent='space-between'>
-        <H5>Analytics</H5>
+        <H5>Thống kê</H5>
         <AnalyticsPopover />
       </FlexBox>
 
