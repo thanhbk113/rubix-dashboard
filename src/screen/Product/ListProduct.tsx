@@ -119,7 +119,7 @@ const ListProduct: WithLayout = () => {
                   <h4 className='cursor-pointer transition-all hover:text-amber-400'>
                     {product.name}
                   </h4>
-                  <span>${product.price}.00</span>
+                  <span>${product.price}</span>
                   <p>{product.description}</p>
                 </div>
                 <div className='flex justify-end gap-4'>
