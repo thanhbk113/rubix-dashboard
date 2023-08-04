@@ -86,11 +86,11 @@ const Login = () => {
         <div className='flex flex-col items-start'>
           <div className='flex flex-col items-start pb-6'>
             <h2 className='text-2xl font-semibold text-light-text-primary'>
-              Welcome to Rubix!👋🏻
+              Chào mừng đến Rubix Admin!👋🏻
             </h2>
 
             <p className='text-light-text-secondary'>
-              Please sign-in to your account and start the adventure
+              Vui lòng đăng nhập vào tài khoản của bạn và bắt đầu cuộc phiêu lưu
             </p>
           </div>
 
@@ -184,9 +184,9 @@ const Login = () => {
             </Link>
           </Social> */}
           <div className='my-4 flex w-full items-center justify-center gap-4 text-xs'>
-            <p>New on our platform?</p>
+            <p>Mới trên nền tảng của chúng tôi?</p>
             <Link href='/register' className='text-light-primary-main'>
-              Create an account
+              Tạo tài khoản
             </Link>
           </div>
         </div>

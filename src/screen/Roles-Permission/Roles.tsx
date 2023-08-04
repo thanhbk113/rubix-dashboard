@@ -1,6 +1,5 @@
 import { Checkbox } from '@mui/material';
 import React, { useEffect } from 'react';
-import { MdOutlineIosShare } from 'react-icons/md';
 
 import TablePagination from '@/components/Common/TablePagination';
 import Title from '@/components/Common/Title';
@@ -40,23 +39,6 @@ const Roles: WithLayout = () => {
   return (
     <div className='w-full bg-light-background-body px-16 py-10'>
       <div className='w-full rounded-xl bg-white shadow-lg '>
-        <div className='h-24 w-full'>
-          <div className='mx-5 flex h-full flex-row items-center justify-between'>
-            <button className='h-10 w-36 rounded-lg border border-light-borderColor font-medium text-light-text-secondary'>
-              <div className='flex flex-row items-center justify-center space-x-2'>
-                <MdOutlineIosShare style={{ fontSize: '24px' }} />
-                <span className=''>EXPORT</span>
-              </div>
-            </button>
-            <div className='flex flex-row'>
-              <input
-                placeholder='Search'
-                className='mr-5 h-10 w-[600px] rounded-lg border border-light-borderColor px-5 font-medium text-light-text-secondary outline-light-primary-light'
-                onChange={(e) => handleSort({ search: e.target.value })}
-              ></input>
-            </div>
-          </div>
-        </div>
         <table className='w-full'>
           <thead>
             <tr className='grid h-16 w-full border-collapse grid-cols-7 border bg-light-background-body'>

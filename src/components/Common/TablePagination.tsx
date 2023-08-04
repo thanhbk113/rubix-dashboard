@@ -52,7 +52,7 @@ const TablePagination: FC<ITablePagination> = ({ pagination, handleSort }) => {
 
   return (
     <div className='mr-8 flex h-16 w-full items-center justify-end gap-4'>
-      <span>Rows per page:</span>
+      <span>Các hàng trên một trang:</span>
       <FormControl fullWidth style={{ width: '66px' }}>
         {/* <Select
           sx={{
@@ -80,7 +80,7 @@ const TablePagination: FC<ITablePagination> = ({ pagination, handleSort }) => {
         </Select> */}
       </FormControl>
       <span>
-        {valueLeftPage}-{valueRightPage} of {pagination}
+        {valueLeftPage}-{valueRightPage} của {pagination}
       </span>
       <div className='flex items-center justify-between gap-2 pr-4'>
         <span

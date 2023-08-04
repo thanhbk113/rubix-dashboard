@@ -55,7 +55,7 @@ const CreateCategory: WithLayout = () => {
         reqCreateCategory.image = res.data.urls[0];
 
         const _ = await CmsApi.createCategory(reqCreateCategory);
-        toast.success('Create category successfully!');
+        toast.success('Tạo thành công!');
         // setMessage({
         //   isSuccess: true,
         //   message: 'Success',
@@ -71,9 +71,9 @@ const CreateCategory: WithLayout = () => {
     },
 
     validationSchema: Yup.object().shape({
-      name: Yup.string().required('You must enter your name.'),
-      slug: Yup.string().required('You must enter your slug.'),
-      status: Yup.string().required('You must enter your status.'),
+      name: Yup.string().required('Bạn phải nhập tên.'),
+      slug: Yup.string().required('Bạn phải nhập slug.'),
+      status: Yup.string().required('Bạn phải nhập trạng thái.'),
     }),
   });
 
@@ -125,20 +125,20 @@ const CreateCategory: WithLayout = () => {
   return (
     <div className='mx-10 h-full gap-6'>
       <div className='rounded-xl bg-white px-10 py-8 font-semibold text-light-text-primary  shadow-lg'>
-        <h2 className='mb-4 text-xl'>Create Category</h2>
+        <h2 className='mb-4 text-xl'>Tạo doanh mục</h2>
         <form
           onSubmit={formik.handleSubmit}
           className='w-full'
           encType='multipart/form-data'
         >
           <label htmlFor='' className='text-sm'>
-            Category Name
+            Tên danh mục
           </label>
           <Input
             id='name'
             name='name'
             type='text'
-            placeholder='Enter Name'
+            placeholder='Nhập tên danh mục'
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.name}
@@ -148,13 +148,13 @@ const CreateCategory: WithLayout = () => {
           ) : null}
           <div className='mb-2'>
             <label htmlFor='' className='text-sm'>
-              Description
+              Mô tả
             </label>
             <textarea
-              name='description'
+              name='Mô tả'
               id='description'
               className='h-40 w-full overflow-y-hidden rounded-lg border p-4 outline-none'
-              placeholder='Please write here ...'
+              placeholder='Vui lòng nhập ở đây ...'
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.description}
@@ -168,7 +168,7 @@ const CreateCategory: WithLayout = () => {
               id='slug'
               name='slug'
               type='text'
-              placeholder='Enter Slug'
+              placeholder='Nhập Slug'
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.slug}
@@ -182,13 +182,13 @@ const CreateCategory: WithLayout = () => {
 
           <div className='w-full'>
             <label htmlFor='' className='text-sm'>
-              Status
+              Trạng thái
             </label>
             <Input
               id='status'
-              name='status'
+              name='Trạng thái'
               type='text'
-              placeholder='Enter Status'
+              placeholder='Nhập trạng thái'
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.status}
@@ -210,7 +210,7 @@ const CreateCategory: WithLayout = () => {
                 />
               </Stack>
             </span>
-            <span>Active</span>
+            <span>Hoạt động</span>
           </div>
 
           <div className='my-10 h-full'>
@@ -222,7 +222,7 @@ const CreateCategory: WithLayout = () => {
               type='submit'
               large={true}
               className='mb-4 w-[12%] rounded-lg bg-light-primary-light text-sm text-white hover:bg-light-primary-main hover:shadow-lg'
-              title='SUBMIT'
+              title='Hoàn tất'
             />
           </div>
         </form>

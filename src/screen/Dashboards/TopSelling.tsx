@@ -26,7 +26,7 @@ const TopSelling: FC = () => {
 
   return (
     <Card sx={{ padding: '2rem' }}>
-      <H5>Top Selling Products</H5>
+      <H5>Những sản phẩm hàng đầu</H5>
 
       {productBestSelling.map((product, index) => (
         <FlexBox key={index} mt='1.2rem'>

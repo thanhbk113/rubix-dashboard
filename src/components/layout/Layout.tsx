@@ -24,25 +24,25 @@ const ListLabels = [
   {
     path: '/',
     exact: true,
-    label: 'ECommerce',
+    label: 'Thống kê',
   },
 ];
 
 const ListProductLabels = [
   {
     path: '/product/list-product',
-    label: 'List Product',
+    label: 'Danh sách sản phẩm',
   },
   {
     path: '/product/create-product',
-    label: 'Create Product',
+    label: 'Tạo sản phẩm',
   },
 ];
 
 const ListCategoriesLabels = [
   {
     path: '/categories/create-category',
-    label: 'Create Category',
+    label: 'Tạo danh mục',
   },
 ];
 
@@ -50,7 +50,7 @@ const ListRolesPermisstionLabels = [
   {
     path: '/roles',
     exact: true,
-    label: 'Roles',
+    label: 'Các vai trò',
   },
 ];
 
@@ -66,7 +66,7 @@ const Order = [
   {
     path: '/order',
     exact: true,
-    label: 'Order',
+    label: 'Đơn hàng',
   },
 ];
 
@@ -120,7 +120,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         <NavMenu
           className='bg-light-background-hover'
           labelIcon={<MdOutlineHome />}
-          title='Dashboard'
+          title='Trang chủ'
           isEnableArrowIcon={true}
           listRoutes={ListLabels}
         />
@@ -128,7 +128,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         {isShow ? (
           <div className='relative my-4 h-6 w-full'>
             <span className='h-full w-[70%] pl-8 text-sm font-normal text-neutral-400'>
-              APP & PAGES
+              Quản lý
             </span>
             <span className='absolute left-0 top-2 h-1	 w-[6%] border-b border-slate-300'></span>
           </div>
@@ -142,25 +142,25 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         /> */}
         <NavMenu
           labelIcon={<MdOutlineLockOpen />}
-          title='Roles & Permissions'
+          title='Vai trò & Quyền'
           isEnableArrowIcon={true}
           listRoutes={ListRolesPermisstionLabels}
         />
         <NavMenu
           labelIcon={<MdOutlineGridView />}
-          title='Product'
+          title='Sản phẩm'
           isEnableArrowIcon={true}
           listRoutes={ListProductLabels}
         />
         <NavMenu
           labelIcon={<MdOutlineCategory />}
-          title='Categories'
+          title='Danh mục'
           isEnableArrowIcon={true}
           listRoutes={ListCategoriesLabels}
         />
         <NavMenu
           labelIcon={<MdOutlineLocalMall />}
-          title='Order'
+          title='Đơn hàng'
           isEnableArrowIcon={true}
           listRoutes={Order}
         />

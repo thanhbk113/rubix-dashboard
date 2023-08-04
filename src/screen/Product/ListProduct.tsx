@@ -97,7 +97,7 @@ const ListProduct: WithLayout = () => {
 
   return (
     <div>
-      <h3 className='mb-4'>List Product</h3>
+      <h3 className='mb-4'>Danh sách sản phẩm</h3>
       {isLoading ? (
         <div className='flex h-full w-full flex-col items-start justify-center gap-6'>
           {products.map((product) => (
@@ -130,7 +130,7 @@ const ListProduct: WithLayout = () => {
                     Update
                   </Link> */}
                   <Button
-                    title='Remove'
+                    title='Xóa'
                     onClick={() => handleDeleteProduct(product.id)}
                     className=' outline-none hover:text-red-600 '
                   />
@@ -188,8 +188,8 @@ const ListProduct: WithLayout = () => {
           </ButtonPage>
         </div>
         <span className='text-gray-500'>
-          Showing {prevPage ? page * take - 11 : 1}-
-          {nextPage ? take * page : itemCount} of {itemCount} Results
+          Đang xem {prevPage ? page * take - 11 : 1}-
+          {nextPage ? take * page : itemCount} of {itemCount} tất cả kết quả
         </span>
       </div>
     </div>

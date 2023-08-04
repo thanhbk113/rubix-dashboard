@@ -78,7 +78,7 @@ const CreateProduct: WithLayout = () => {
           reqCreateItem.images = res.data.urls;
         }
         const _ = await CmsApi.createItem(reqCreateItem);
-        toast.success('Create product success');
+        toast.success('Tạo sản phẩm thành công');
       } catch (error: any) {
         toast.error(error.data.message);
       }
@@ -90,27 +90,27 @@ const CreateProduct: WithLayout = () => {
     },
 
     validationSchema: Yup.object().shape({
-      name: Yup.string().required('You must enter your name.'),
-      price: Yup.string().required('You must enter your price.'),
-      cost: Yup.string().required('You must enter your cost.'),
-      quantity: Yup.string().required('You must enter your quantity.'),
-      stock: Yup.string().required('You must enter your stock.'),
+      name: Yup.string().required('Bạn phải nhập tên.'),
+      price: Yup.string().required('Bạn phải nhập giá.'),
+      cost: Yup.string().required('Bạn phải nhập giá.'),
+      quantity: Yup.string().required('Bạn phải nhập số lượng.'),
+      stock: Yup.string().required('Bạn phải nhập số lượng.'),
     }),
   });
 
   return (
     <div className='mx-10 h-full gap-6'>
       <div className='rounded-xl bg-white px-10 py-8 font-semibold text-light-text-primary  shadow-lg'>
-        <h2 className='mb-4 text-xl'>Create Product</h2>
+        <h2 className='mb-4 text-xl'>Tạo sản phẩm</h2>
         <form onSubmit={formik.handleSubmit} className='w-full'>
           <label htmlFor='' className='text-sm'>
-            Product Name
+            Tên sản phẩm
           </label>
           <Input
             id='name'
             name='name'
             type='text'
-            placeholder='Enter Name'
+            placeholder='Nhập tên sản phẩm'
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.name}
@@ -120,13 +120,13 @@ const CreateProduct: WithLayout = () => {
           ) : null}
           <div className='mb-2'>
             <label htmlFor='' className='text-sm'>
-              Description
+              Mô tả
             </label>
             <textarea
-              name='description'
+              name='Mô tả'
               id='description'
               className='h-20 w-full overflow-y-hidden rounded-lg border p-4 outline-none'
-              placeholder='Please write here ...'
+              placeholder='Vui lòng nhập ở đây ...'
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.description}
@@ -135,13 +135,13 @@ const CreateProduct: WithLayout = () => {
           <div className='flex items-center justify-between gap-6'>
             <div className='w-full'>
               <label htmlFor='' className='text-sm'>
-                Stock
+                Tồn kho
               </label>
               <Input
                 id='stock'
                 name='stock'
                 type='number'
-                placeholder='Enter Stock'
+                placeholder='Nhập số tồn kho'
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.stock}
@@ -155,13 +155,13 @@ const CreateProduct: WithLayout = () => {
             <div className='w-full'>
               <div>
                 <label htmlFor='' className='text-sm'>
-                  Quantity
+                  Số lượng
                 </label>
                 <Input
                   id='quantity'
                   name='quantity'
                   type='number'
-                  placeholder='Enter Quantity'
+                  placeholder='Nhập số lượng'
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   value={formik.values.quantity}
@@ -177,13 +177,13 @@ const CreateProduct: WithLayout = () => {
 
           <div className='w-full'>
             <label htmlFor='' className='text-sm'>
-              Cost
+              Giá vốn
             </label>
             <Input
               id='cost'
               name='cost'
               type='number'
-              placeholder='Enter Cost'
+              placeholder='Nhập giá vốn'
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.cost}
@@ -197,13 +197,13 @@ const CreateProduct: WithLayout = () => {
 
           <div className='w-full'>
             <label htmlFor='' className='text-sm'>
-              Price
+              Giá bán
             </label>
             <Input
               id='price'
               name='price'
               type='number'
-              placeholder='Enter Price'
+              placeholder='Nhập giá bán'
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.price}
@@ -216,7 +216,7 @@ const CreateProduct: WithLayout = () => {
           </div>
 
           <label htmlFor='' className='text-sm'>
-            Category
+            Danh mục
           </label>
           <Autocomplete
             disablePortal
@@ -230,7 +230,7 @@ const CreateProduct: WithLayout = () => {
                 {...params}
                 variant='outlined'
                 style={{ borderRadius: '30px' }}
-                placeholder='Category'
+                placeholder='Danh mục'
               />
             )}
           />
@@ -242,7 +242,7 @@ const CreateProduct: WithLayout = () => {
 
           <div className='mt-4'>
             <label htmlFor='' className='text-sm'>
-              Detail
+              Chi tiết
             </label>
             <textarea
               name='details'
@@ -250,7 +250,7 @@ const CreateProduct: WithLayout = () => {
               cols={30}
               rows={10}
               className='h-40 w-full overflow-y-hidden rounded-lg border p-4 outline-none'
-              placeholder='Please write here ...'
+              placeholder='Vui lòng viết ở đây ...'
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.details}
@@ -265,7 +265,7 @@ const CreateProduct: WithLayout = () => {
               type='submit'
               large={true}
               className='mb-4 w-[12%] rounded-lg bg-light-primary-light text-sm text-white hover:bg-light-primary-main hover:shadow-lg'
-              title='SUBMIT'
+              title='GỬI'
             />
           </div>
         </form>
