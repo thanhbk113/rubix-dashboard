@@ -73,7 +73,7 @@ const RecentOrders: FC = () => {
             <TableRow>
               <HeadTableCell>Top</HeadTableCell>
               <HeadTableCell>Tên Người Dùng</HeadTableCell>
-              <HeadTableCell>Số điện thoại</HeadTableCell>
+              <HeadTableCell>Tổng tiền</HeadTableCell>
               <HeadTableCell>Email</HeadTableCell>
               {/* <HeadTableCell>Total amount</HeadTableCell> */}
             </TableRow>
@@ -86,21 +86,7 @@ const RecentOrders: FC = () => {
                 <BodyTableCell>
                   <Small ml='1rem'>{item.username}</Small>
                 </BodyTableCell>
-                <BodyTableCell>{item.phone}</BodyTableCell>
-                {/* <BodyTableCell>
-                  <Box
-                    sx={{
-                      backgroundColor: 'secondary.200',
-                      borderRadius: 11,
-                      maxWidth: 55,
-                      padding: '0.3rem',
-                      textAlign: 'center',
-                      color: 'secondary.400',
-                    }}
-                  >
-                    {item.totalOrder}
-                  </Box>
-                </BodyTableCell> */}
+                <BodyTableCell>{item.total_spent} đ</BodyTableCell>
                 <BodyTableCell>{item.email}</BodyTableCell>
               </TableRow>
             ))}

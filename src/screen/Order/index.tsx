@@ -49,8 +49,8 @@ const Order: WithLayout = () => {
               <div className='mb-4 flex w-full flex-col justify-between'>
                 <div className='flex flex-col gap-1'>
                   <div className='flex justify-between'>
-                    <h4 className='cursor-pointer transition-all hover:text-amber-400'>
-                      {product.id}
+                    <h4 className='cursor-pointer text-green-500 transition-all hover:text-amber-400'>
+                      {product.user.username}
                     </h4>
                     {product.status === 'pending' ? (
                       <Button

@@ -27,4 +27,5 @@ export interface UserMostSpent {
   avatar: null;
   role: string;
   cart_id: string;
+  total_spent: string;
 }
