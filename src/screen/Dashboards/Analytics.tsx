@@ -45,7 +45,7 @@ const Analytics: FC = () => {
   const chartOptions: ApexOptions = {
     chart: { background: 'transparent' },
     colors: [theme.palette.primary.main, '#FF9777', '#FF6B93'],
-    labels: ['Người dùng', 'Đơn hàng', 'Doanh thu'],
+    labels: ['Tổng đơn hàng', 'Đơn hàng', 'Doanh thu'],
     plotOptions: {
       radialBar: {
         dataLabels: {
