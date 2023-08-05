@@ -165,7 +165,7 @@ const Login = () => {
               type='submit'
               large={true}
               className='mb-4  rounded-lg bg-light-primary-light text-sm text-white hover:bg-light-primary-main hover:shadow-lg'
-              title='LOGIN'
+              title='Đăng nhập'
             />
           </form>
 
