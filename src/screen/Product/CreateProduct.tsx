@@ -120,13 +120,13 @@ const CreateProduct: WithLayout = () => {
           ) : null}
           <div className='mb-2'>
             <label htmlFor='' className='text-sm'>
-              Mô tả
+              Mô Tả
             </label>
             <textarea
-              name='Mô tả'
+              name='description'
               id='description'
-              className='h-20 w-full overflow-y-hidden rounded-lg border p-4 outline-none'
-              placeholder='Vui lòng nhập ở đây ...'
+              className='h-40 w-full overflow-y-hidden rounded-lg border p-4 outline-none'
+              placeholder='Xin viết ở đây ...'
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.description}
