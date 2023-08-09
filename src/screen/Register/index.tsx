@@ -67,10 +67,10 @@ const Register = () => {
         <div className='flex flex-col items-start'>
           <div className='flex flex-col items-start pb-6'>
             <h2 className='text-2xl font-semibold text-light-text-primary'>
-              Adventure starts here 🚀
+              Cuộc phiêu lưu bắt đầu ở đây 🚀
             </h2>
             <p className='text-light-text-secondary'>
-              Make your app management easy and fun!
+              Làm ứng dụng của bạn dể quản lý và nhiều niềm vu
             </p>
           </div>
           <form
