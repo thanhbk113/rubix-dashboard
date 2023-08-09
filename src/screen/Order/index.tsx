@@ -73,27 +73,30 @@ const Order: WithLayout = () => {
                 </div>
               </div>
               <div className='flex flex-col gap-4'>
-                {product.orderItems.map((item) => (
-                  <div
-                    className='flex h-full w-full justify-start gap-2 border-gray-300 '
-                    key={item.id}
-                  >
-                    <NextImage
-                      width={50}
-                      height={50}
-                      src={item.item.images[0]}
-                      alt=''
-                      className='h-full '
-                    />
-                    <div className='flex w-full flex-col'>
-                      <H4>{item.item.name}</H4>
-                      <div className='flex w-full justify-between'>
-                        <H4>Giá: {item.item.price} đ</H4>
-                        <H4>Số lượng: {item.quantity}</H4>
+                {product.orderItems.map((item) => {
+                  console.log(item.item);
+                  return (
+                    <div
+                      className='flex h-full w-full justify-start gap-2 border-gray-300 '
+                      key={item.id}
+                    >
+                      <NextImage
+                        width={50}
+                        height={50}
+                        src={item.item.images[0]}
+                        alt=''
+                        className='h-full '
+                      />
+                      <div className='flex w-full flex-col'>
+                        <H4>{item.item.name}</H4>
+                        <div className='flex w-full justify-between'>
+                          <H4>Giá: {item.item.price} đ</H4>
+                          <H4>Số lượng: {item.quantity}</H4>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           ))}
