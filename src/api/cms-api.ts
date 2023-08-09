@@ -85,7 +85,7 @@ export const CmsApi = {
   },
 
   getListOrders: () => {
-    return axiosClient.get<ResOrder>('/api/order/list');
+    return axiosClient.get<ResOrder>('/api/order/list-admin');
   },
 
   completeOrder: (id: string) => {
