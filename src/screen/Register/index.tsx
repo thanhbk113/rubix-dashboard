@@ -1,4 +1,5 @@
 import { useFormik } from 'formik';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import * as Yup from 'yup';
@@ -149,7 +150,7 @@ const Register = () => {
               type='submit'
               large={true}
               className='rounded-lg bg-light-primary-light text-sm text-white hover:bg-light-primary-main hover:shadow-lg'
-              title='Register'
+              title='Đăng ký'
             />
           </form>
           {error && (
@@ -160,12 +161,12 @@ const Register = () => {
               or
             </p>
           </div> */}
-          {/* <div className='mb-4 flex w-full items-center justify-center gap-4 text-xs'>
-            <p>Already have an account?</p>
+          <div className='my-4 flex w-full items-center justify-center gap-4 text-xs'>
+            <p>Đã có tài khoản?</p>
             <Link href='/login' className='text-light-primary-main'>
-              Sign in instead
+              Đăng nhập
             </Link>
-          </div> */}
+          </div>
           {/* <Social>
             <Link href='https://www.facebook.com/lownsni'>
               <NextImage height={20} width={20} src='/svg/fb.svg' alt='' />
